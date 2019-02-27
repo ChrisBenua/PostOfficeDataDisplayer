@@ -1,0 +1,34 @@
+﻿<Window x:Class="PostOfficesDataDisplayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostOfficesDataDisplayer"
+        xmlns:usercontrols="clr-namespace:PostOfficesDataDisplayer.UserControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Save..." FontSize="18">
+                <MenuItem Header="В новый файл"></MenuItem>
+                <MenuItem Header="Добавить в существующий файл"></MenuItem>
+                <MenuItem Header="Заменить содержимое файла"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Open" FontSize="18"></MenuItem>
+        </Menu>
+
+        <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="0" InitialValue="0" Width="40"
+                                           MaxWidth="80" HorizontalAlignment="Left" MaxHeight="33"></usercontrols:NumericUpDownElement>
+
+        <DataGrid x:Name="dataGrid" Grid.Row="2"></DataGrid>
+    
+    </Grid>
+</Window>
