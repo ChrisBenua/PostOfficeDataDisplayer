@@ -10,6 +10,14 @@ namespace PostOfficesDataDisplayer.Models
 {
     public class PostOffice: INotifyPropertyChanged
     {
+
+        public static readonly string[] PropertieNames = new string[] { "RowNum", "FullName", "ShortName", "Contacts.PostalCode",
+            "Location.AdmArea", "Location.District", "Contacts.Address", "Contacts.AddressExtraInfo", "Contacts.ChiefPhone",
+            "Contacts.DeliveryDepartmentPhone", "Contacts.TelegraphPhone", "Schedule.WorkingHours", "Schedule.WorkingHoursExtra",
+            "ClassOPS", "TypeOPS", "MMP", "CloseFlag", "CloseExtraInfo", "UNOM", "Location.Coords.XCoordStr", "Location.Coords.YCoordStr", "GlobalID"
+        };
+
+
         private Location _location;
         
         public Location Location
@@ -198,6 +206,20 @@ namespace PostOfficesDataDisplayer.Models
             this.CloseExtraInfo = closeFlagExtra;
             this.UNOM = unom;
             this.GlobalID = globalID;
+        }
+
+        public PostOffice()
+        {
+            this.Contacts = new OfficeContacts();
+            this.Location = new Location();
+            this.Schedule = new WorkingSchedule("", "");
+            this.ClassOPS = "";
+            this.TypeOPS = "";
+            this.MMR = MMR;
+            this.CloseFlag = "";
+            this.CloseExtraInfo = "";
+            this.UNOM = "";
+            this.GlobalID = "";
         }
 
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")

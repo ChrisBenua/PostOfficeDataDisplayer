@@ -46,7 +46,11 @@
         <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="1" InitialValue="1" Width="40"
                                            MaxWidth="80" HorizontalAlignment="Left" MaxHeight="33"></usercontrols:NumericUpDownElement>
 
-        
+        <Button x:Name="mAddButton" Grid.Row="1" Grid.Column="3" Template="{StaticResource RoundButton}" Background="LightGreen"
+                Margin="10, 5" Content="Add Entity"></Button>
+
+        <Button x:Name="mDeleteButton" Grid.Row="1" Grid.Column="4" Template="{StaticResource RoundButton}" Background="Red"
+                Margin="10, 5" Content="Remove Entity"></Button>
         
         <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.ColumnSpan="10"></DataGrid>
     

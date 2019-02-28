@@ -9,12 +9,56 @@ using System.Threading.Tasks;
 namespace PostOfficesDataDisplayer.Models
 {
 
-    public class Point
+    public class Point : INotifyPropertyChanged
     {
         private double _x;
         private double _y;
 
         private Predicate<Double> validateCoords;
+
+        private string _xcoordStr;
+
+        private string _ycoordStr;
+
+        public bool Valid()
+        {
+            double helper;
+            return ((double.TryParse(XCoordStr ?? "", out helper) || (XCoordStr ?? "").Length == 0) && 
+                (double.TryParse(YCoordStr ?? "", out helper) || (YCoordStr ?? "").Length == 0));
+        }
+
+        public string XCoordStr
+        {
+            get => _xcoordStr;
+
+            set
+            {
+                double helper;
+                if (double.TryParse(value, out helper))
+                {
+                    X = helper;
+                }
+                _xcoordStr = value;
+                OnPropertyChanged();
+
+            }
+        }
+
+        public string YCoordStr
+        {
+            get => _ycoordStr;
+
+            set
+            {
+                double helper;
+                if (double.TryParse(value, out helper))
+                {
+                    Y = helper;
+                }
+                _xcoordStr = value;
+                OnPropertyChanged();
+            }
+        }
 
         public double X
         {
@@ -58,13 +102,8 @@ namespace PostOfficesDataDisplayer.Models
 
         public Point(string x, string y)
         {
-            double xx; double yy;
-            if (!double.TryParse(x, out xx) || !double.TryParse(y, out yy))
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            this.X = xx;
-            this.Y = yy;
+            XCoordStr = x;
+            YCoordStr = y;
         }
 
         public Point(Point other)
@@ -92,6 +131,13 @@ namespace PostOfficesDataDisplayer.Models
         }
 
         public event Action IncorrectCoordsEntered;
+
+        public void OnPropertyChanged([CallerMemberName]string propertyName="")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public class Location: INotifyPropertyChanged
@@ -146,6 +192,13 @@ namespace PostOfficesDataDisplayer.Models
             this.Coords = new Point(x, y);
             this.District = district;
             this.AdmArea = admArea;
+        }
+
+        public Location()
+        {
+            this.Coords = new Point(0, 0);
+            this.District = "";
+            this.AdmArea = "";
         }
 
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")

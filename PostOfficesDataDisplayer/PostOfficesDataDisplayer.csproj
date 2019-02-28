@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="UserControls\UserControlsViewModel\NumericUpDownViewModel.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
+    <Compile Include="ViewModels\PostOfficeDisplayerViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,8 +112,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

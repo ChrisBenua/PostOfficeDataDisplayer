@@ -99,6 +99,16 @@ namespace PostOfficesDataDisplayer.Models
             this.TelegraphPhone = telegraphPhone;
         }
 
+        public OfficeContacts()
+        {
+            this.PostalCode = "";
+            this.Address = "";
+            this.AddressExtraInfo = "";
+            this.ChiefPhone = "";
+            this.DeliveryDepartmentPhone = "";
+            this.TelegraphPhone = "";
+        }
+
 
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")
         {
