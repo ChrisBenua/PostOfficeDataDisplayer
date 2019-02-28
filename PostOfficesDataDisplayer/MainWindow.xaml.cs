@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PostOfficesDataDisplayer.ViewModels;
 using PostOfficesDataDisplayer.Models;
+using PostOfficesDataDisplayer.UserControls;
 
 namespace PostOfficesDataDisplayer
 {
@@ -30,6 +31,9 @@ namespace PostOfficesDataDisplayer
             viewModel = new PostOfficeDisplayerViewModel();
             InitializeComponent();
 
+            mHintTextBox.Text = "Всего записей" + Environment.NewLine + "в таблице";
+
+            viewModel.PrefixCount = mUpDownControl.InitialValue;
             mAddButton.Command = viewModel.AddCommand;
             mDeleteButton.Command = viewModel.DeleteCommand;
 
@@ -38,8 +42,8 @@ namespace PostOfficesDataDisplayer
             dataGrid.CanUserReorderColumns = false;
             dataGrid.CanUserSortColumns = false;
             dataGrid.CanUserResizeColumns = true;
-            
 
+            mOpenFile.Command = viewModel.OpenFileCommand;
             dataGrid.AutoGenerateColumns = false;
 
             dataGrid.ItemsSource = viewModel.PostOffices;
@@ -56,6 +60,40 @@ namespace PostOfficesDataDisplayer
                 column.Header = PostOffice.PropertieNames[i].Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Last();
                 dataGrid.Columns.Add(column);
             }
+            dataGrid.EnableRowVirtualization = true;
+            
+            dataGrid.SetBinding(DataGrid.SelectedItemProperty, new Binding()
+            {
+                Source = viewModel,
+                Path = new PropertyPath("SelectedOffice"),
+                NotifyOnSourceUpdated = true,
+                NotifyOnTargetUpdated = true,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+            });
+            this.mUpDownControl.ViewModel.MaxValue = 0;
+            mUpDownControl.ViewModel.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "Value")
+                {
+                    this.viewModel.PrefixCount = mUpDownControl.ViewModel.Value;
+                    this.dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
+                }
+                
+            };
+
+            this.viewModel.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "PostOfficesPrefix")
+                {
+                    this.mUpDownControl.ViewModel.MaxValue = this.viewModel.PostOffices.Count;
+                    this.dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
+                }
+
+                if (e.PropertyName == "PostOffices")
+                {
+                    this.mDataSetSizeTextBox.Text = this.viewModel.PostOffices.Count.ToString();
+                }
+            };
             
             //(new TextBox()).LostFocus += MainWindow_LostFocus;
         }
@@ -85,7 +123,7 @@ namespace PostOfficesDataDisplayer
         {
             TextBox current = (sender as TextBox);
             double helper;
-            if (e.Text == ".")
+            if (e.Text != "." || (e.Text.Count(ch => ch == '.') + current.Text.Count(ch => ch =='.')) != 1)
             {
                 if (!double.TryParse(current.Text + e.Text, out helper) || (current.Text + e.Text).Length > PostOfficeDisplayerViewModel.MaxLenForNumberColumns)
                 {

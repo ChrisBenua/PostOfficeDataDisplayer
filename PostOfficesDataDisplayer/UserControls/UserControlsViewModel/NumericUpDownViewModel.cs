@@ -98,6 +98,7 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
                 _value = value;
 
                 ValidateValue();
+                OnPropertyChanged();
             }
         }
 
@@ -110,8 +111,6 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
 
 
             OnPropertyChanged("Text");
-
-            OnPropertyChanged();
         }
 
         private RelayCommand _increaseCommand;

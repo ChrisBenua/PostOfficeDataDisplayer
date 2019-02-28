@@ -28,15 +28,16 @@ namespace PostOfficesDataDisplayer.UserControls
             typeof(NumericUpDownElement), new UIPropertyMetadata(100, ValueChanged));
         public readonly static DependencyProperty InitialValueProperty = DependencyProperty.Register("InitialValue", typeof(int),
             typeof(NumericUpDownElement), new UIPropertyMetadata(0, ValueChanged));
+        
 
-        private NumericUpDownViewModel viewModel;
+        public NumericUpDownViewModel ViewModel { get; private set; }
 
         private static void ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as NumericUpDownElement;
 
-            control.viewModel.MaxValue = (int)control.GetValue(MaximumValueProperty);
-            control.viewModel.MinValue = (int)control.GetValue(MinimumValueProperty);                
+            control.ViewModel.MaxValue = (int)control.GetValue(MaximumValueProperty);
+            control.ViewModel.MinValue = (int)control.GetValue(MinimumValueProperty);                
         }
 
         public int Maximum
@@ -82,12 +83,12 @@ namespace PostOfficesDataDisplayer.UserControls
         public NumericUpDownElement()
         {
             InitializeComponent();
-            viewModel = new NumericUpDownViewModel(Minimum, Maximum, InitialValue);
+            ViewModel = new NumericUpDownViewModel(Minimum, Maximum, InitialValue);
 
 
             valueTextBox.SetBinding(TextBox.TextProperty, new Binding()
             {
-                Source = viewModel,
+                Source = ViewModel,
                 Path = new PropertyPath("Text"),
                 Mode = BindingMode.TwoWay,
                 NotifyOnSourceUpdated = true,
@@ -95,14 +96,14 @@ namespace PostOfficesDataDisplayer.UserControls
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             });
 
-            increaseButton.Command = viewModel.IncreaseCommand;
-            decreaseButton.Command = viewModel.DecreaseCommand;
+            increaseButton.Command = ViewModel.IncreaseCommand;
+            decreaseButton.Command = ViewModel.DecreaseCommand;
 
-            viewModel.PropertyChanged += (s, e) =>
+            ViewModel.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == "Text")
                 {
-                    valueTextBox.CaretIndex = viewModel.Text.Length;
+                    valueTextBox.CaretIndex = ViewModel.Text.Length;
                 }
             };
         }

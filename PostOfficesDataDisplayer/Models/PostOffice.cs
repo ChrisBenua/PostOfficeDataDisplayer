@@ -14,7 +14,7 @@ namespace PostOfficesDataDisplayer.Models
         public static readonly string[] PropertieNames = new string[] { "RowNum", "FullName", "ShortName", "Contacts.PostalCode",
             "Location.AdmArea", "Location.District", "Contacts.Address", "Contacts.AddressExtraInfo", "Contacts.ChiefPhone",
             "Contacts.DeliveryDepartmentPhone", "Contacts.TelegraphPhone", "Schedule.WorkingHours", "Schedule.WorkingHoursExtra",
-            "ClassOPS", "TypeOPS", "MMP", "CloseFlag", "CloseExtraInfo", "UNOM", "Location.Coords.XCoordStr", "Location.Coords.YCoordStr", "GlobalID"
+            "ClassOPS", "TypeOPS", "MMR", "CloseFlag", "CloseExtraInfo", "UNOM", "Location.Coords.XCoordStr", "Location.Coords.YCoordStr", "GlobalID"
         };
 
 
@@ -206,6 +206,9 @@ namespace PostOfficesDataDisplayer.Models
             this.CloseExtraInfo = closeFlagExtra;
             this.UNOM = unom;
             this.GlobalID = globalID;
+            this.RowNum = rowNum;
+            this.FullName = fullName;
+            this.ShortName = shortName;
         }
 
         public PostOffice()
@@ -220,6 +223,12 @@ namespace PostOfficesDataDisplayer.Models
             this.CloseExtraInfo = "";
             this.UNOM = "";
             this.GlobalID = "";
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as PostOffice;
+            return (other?.GlobalID ?? "-1") == this.GlobalID;
         }
 
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")

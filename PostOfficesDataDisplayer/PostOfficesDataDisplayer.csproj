@@ -63,6 +63,7 @@
       <DependentUpon>NumericUpDownElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UserControlsViewModel\NumericUpDownViewModel.cs" />
+    <Compile Include="Utils\IOHelper.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="ViewModels\PostOfficeDisplayerViewModel.cs" />
     <Page Include="MainWindow.xaml">

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 using PostOfficesDataDisplayer.Models;
 using PostOfficesDataDisplayer.Utils;
 
@@ -22,6 +23,28 @@ namespace PostOfficesDataDisplayer.ViewModels
 
         public static readonly int MaxLenForStringColumns = 1000;
 
+        private int _prefixCount;
+
+        public int PrefixCount
+        {
+            get => _prefixCount;
+
+            set
+            {
+                _prefixCount = value;
+                OnPropertyChanged();
+                OnPropertyChanged("PostOfficesPrefix");
+            }
+        }
+
+        private ObservableCollection<PostOffice> _postOfficesPrefix;
+
+        public ObservableCollection<PostOffice> PostOfficesPrefix
+        {
+            get => new ObservableCollection<PostOffice>( PostOffices.Take(PrefixCount));
+
+        }
+
         private ObservableCollection<PostOffice> _postOffices;
 
         public ObservableCollection<PostOffice> PostOffices
@@ -33,6 +56,7 @@ namespace PostOfficesDataDisplayer.ViewModels
                 _postOffices = value;
                 _postOffices.CollectionChanged += (s, e) => OnPropertyChanged("PostOffices");
                 OnPropertyChanged();
+                OnPropertyChanged("PostOfficesPrefix");
             }
         }
 
@@ -65,6 +89,7 @@ namespace PostOfficesDataDisplayer.ViewModels
                     }
 
                     PostOffices.RemoveAt(index);
+                    OnPropertyChanged("PostOfficesPrefix");                    
                 }));
             }
         }
@@ -78,6 +103,29 @@ namespace PostOfficesDataDisplayer.ViewModels
                 return _addCommand ?? (_addCommand = new RelayCommand(obj =>
                 {
                     PostOffices.Add(new PostOffice());
+                    OnPropertyChanged("PostOfficesPrefix");
+                }));
+            }
+        }
+
+        private RelayCommand _openFileCommand;
+
+        public RelayCommand OpenFileCommand
+        {
+            get
+            {
+                return _openFileCommand ?? (_openFileCommand = new RelayCommand(obj => 
+                {
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    dialog.Filter = "Excel Files|*.csv;";
+                    dialog.DefaultExt = ".csv";
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        string filePath = dialog.FileName;
+                        this.PostOffices = new ObservableCollection<PostOffice>(IOHelper.ReadData(filePath));
+                        OnPropertyChanged("PostOfficesPrefix");
+                    }
                 }));
             }
         }

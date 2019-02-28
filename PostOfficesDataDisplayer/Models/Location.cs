@@ -55,7 +55,7 @@ namespace PostOfficesDataDisplayer.Models
                 {
                     Y = helper;
                 }
-                _xcoordStr = value;
+                _ycoordStr = value;
                 OnPropertyChanged();
             }
         }

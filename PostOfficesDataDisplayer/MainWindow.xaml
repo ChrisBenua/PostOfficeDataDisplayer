@@ -10,7 +10,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"></ColumnDefinition>
-            <ColumnDefinition Width="70"></ColumnDefinition>
+            <ColumnDefinition Width="90"></ColumnDefinition>
             <ColumnDefinition Width="70"></ColumnDefinition>
             <ColumnDefinition Width="160"></ColumnDefinition>
             <ColumnDefinition Width="160"></ColumnDefinition>
@@ -30,7 +30,7 @@
                 <MenuItem Header="Добавить в существующий файл"></MenuItem>
                 <MenuItem Header="Заменить содержимое файла"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Open" FontSize="18"></MenuItem>
+            <MenuItem x:Name="mOpenFile" Header="Open" FontSize="18"></MenuItem>
             <MenuItem Header="Sort By" FontSize="18">
                 <MenuItem Header="None"></MenuItem>
                 <MenuItem Header="ClassOPS"></MenuItem>
@@ -43,7 +43,7 @@
             </MenuItem>
         </Menu>
 
-        <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="1" InitialValue="1" Width="40"
+        <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="0" InitialValue="0" Width="40" x:Name="mUpDownControl"
                                            MaxWidth="80" HorizontalAlignment="Left" MaxHeight="33"></usercontrols:NumericUpDownElement>
 
         <Button x:Name="mAddButton" Grid.Row="1" Grid.Column="3" Template="{StaticResource RoundButton}" Background="LightGreen"
@@ -53,6 +53,12 @@
                 Margin="10, 5" Content="Remove Entity"></Button>
         
         <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.ColumnSpan="10"></DataGrid>
+
+        <TextBox Grid.Row="1" Grid.Column="1" AcceptsReturn="true" MaxLines="2" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled"
+                 VerticalScrollBarVisibility="Disabled" x:Name="mHintTextBox" BorderBrush="Transparent"
+                  >Всего записей в таблице</TextBox>
+
+        <TextBlock x:Name="mDataSetSizeTextBox" Grid.Column="2" Grid.Row="1" TextAlignment="Center" Text="0" Padding="0, 10, 0, 0"></TextBlock>
     
     </Grid>
 </Window>
