@@ -23,13 +23,21 @@ namespace PostOfficesDataDisplayer.UserControls
     {
 
         public readonly static DependencyProperty MinimumValueProperty = DependencyProperty.Register("Minimum", typeof(int), 
-            typeof(NumericUpDownElement), new UIPropertyMetadata(0));
+            typeof(NumericUpDownElement), new UIPropertyMetadata(0, ValueChanged));
         public readonly static DependencyProperty MaximumValueProperty = DependencyProperty.Register("Maximum", typeof(int), 
-            typeof(NumericUpDownElement), new UIPropertyMetadata(100));
+            typeof(NumericUpDownElement), new UIPropertyMetadata(100, ValueChanged));
         public readonly static DependencyProperty InitialValueProperty = DependencyProperty.Register("InitialValue", typeof(int),
-            typeof(NumericUpDownElement), new UIPropertyMetadata(0));
+            typeof(NumericUpDownElement), new UIPropertyMetadata(0, ValueChanged));
 
         private NumericUpDownViewModel viewModel;
+
+        private static void ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as NumericUpDownElement;
+
+            control.viewModel.MaxValue = (int)control.GetValue(MaximumValueProperty);
+            control.viewModel.MinValue = (int)control.GetValue(MinimumValueProperty);                
+        }
 
         public int Maximum
         {
@@ -73,8 +81,9 @@ namespace PostOfficesDataDisplayer.UserControls
 
         public NumericUpDownElement()
         {
-            viewModel = new NumericUpDownViewModel(Minimum, Maximum, InitialValue);
             InitializeComponent();
+            viewModel = new NumericUpDownViewModel(Minimum, Maximum, InitialValue);
+
 
             valueTextBox.SetBinding(TextBox.TextProperty, new Binding()
             {

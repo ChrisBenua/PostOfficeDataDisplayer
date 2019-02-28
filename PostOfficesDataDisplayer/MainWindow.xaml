@@ -8,7 +8,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="70"></ColumnDefinition>
+            <ColumnDefinition Width="70"></ColumnDefinition>
+            <ColumnDefinition Width="160"></ColumnDefinition>
+            <ColumnDefinition Width="160"></ColumnDefinition>
+
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -16,19 +24,31 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu>
+        <Menu Grid.ColumnSpan="10">
             <MenuItem Header="Save..." FontSize="18">
                 <MenuItem Header="В новый файл"></MenuItem>
                 <MenuItem Header="Добавить в существующий файл"></MenuItem>
                 <MenuItem Header="Заменить содержимое файла"></MenuItem>
             </MenuItem>
             <MenuItem Header="Open" FontSize="18"></MenuItem>
+            <MenuItem Header="Sort By" FontSize="18">
+                <MenuItem Header="None"></MenuItem>
+                <MenuItem Header="ClassOPS"></MenuItem>
+                <MenuItem Header="ShortName"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Filter By" FontSize="18">
+                <MenuItem Header="None"></MenuItem>
+                <MenuItem Header="TypeOPS"></MenuItem>
+                <MenuItem Header="AdmArea"></MenuItem>
+            </MenuItem>
         </Menu>
 
-        <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="0" InitialValue="0" Width="40"
+        <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="1" InitialValue="1" Width="40"
                                            MaxWidth="80" HorizontalAlignment="Left" MaxHeight="33"></usercontrols:NumericUpDownElement>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="2"></DataGrid>
+        
+        
+        <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.ColumnSpan="10"></DataGrid>
     
     </Grid>
 </Window>

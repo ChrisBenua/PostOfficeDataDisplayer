@@ -18,9 +18,10 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
         {
             get => _minValue;
 
-            private set
+            set
             {
                 _minValue = value;
+                ValidateValue();
                 OnPropertyChanged();
             }
 
@@ -30,9 +31,10 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
         {
             get => _maxValue;
 
-            private set
+            set
             {
                 _maxValue = value;
+                ValidateValue();
                 OnPropertyChanged();
             }
         }
@@ -95,16 +97,21 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
                 
                 _value = value;
 
-                _value = Math.Max(MinValue, _value);
-                _value = Math.Min(MaxValue, _value);
-
-                _text = _value.ToString();
-
-
-                OnPropertyChanged("Text");
-
-                OnPropertyChanged();
+                ValidateValue();
             }
+        }
+
+        private void ValidateValue()
+        {
+            _value = Math.Max(MinValue, _value);
+            _value = Math.Min(MaxValue, _value);
+
+            _text = _value.ToString();
+
+
+            OnPropertyChanged("Text");
+
+            OnPropertyChanged();
         }
 
         private RelayCommand _increaseCommand;
