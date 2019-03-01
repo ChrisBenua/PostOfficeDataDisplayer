@@ -32,14 +32,14 @@
             </MenuItem>
             <MenuItem x:Name="mOpenFile" Header="Open" FontSize="18"></MenuItem>
             <MenuItem Header="Sort By" FontSize="18">
-                <MenuItem Header="None"></MenuItem>
-                <MenuItem Header="ClassOPS"></MenuItem>
-                <MenuItem Header="ShortName"></MenuItem>
+                <MenuItem x:Name="mSortByNone" Header="None"></MenuItem>
+                <MenuItem x:Name="mSortByClassOPS" Header="ClassOPS"></MenuItem>
+                <MenuItem x:Name="mSortByShortName" Header="ShortName"></MenuItem>
             </MenuItem>
             <MenuItem Header="Filter By" FontSize="18">
-                <MenuItem Header="None"></MenuItem>
-                <MenuItem Header="TypeOPS"></MenuItem>
-                <MenuItem Header="AdmArea"></MenuItem>
+                <MenuItem x:Name="mFilterByNone" Header="None"></MenuItem>
+                <MenuItem x:Name="mFilterByTypeOPS" Header="TypeOPS"></MenuItem>
+                <MenuItem x:Name="mFilterByAdmArea" Header="AdmArea"></MenuItem>
             </MenuItem>
         </Menu>
 

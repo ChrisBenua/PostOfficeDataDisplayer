@@ -19,9 +19,46 @@ namespace PostOfficesDataDisplayer.ViewModels
 
         public static readonly int[] DoubleColumns = new int[] {19, 20};
 
-        public static readonly int MaxLenForNumberColumns = 50;
+        public static readonly int MaxLenForDoubleColumns = 50;
+
+        public static readonly int MaxLenForIntColumns = 10;
 
         public static readonly int MaxLenForStringColumns = 1000;
+
+        private int _filterPredicateIndex = 0;
+
+        private int _sortPredicateIndex = 0;
+
+        private string _filterStr;
+
+        public string FilterStr
+        {
+            get => _filterStr;
+            set
+            {
+                _filterStr = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private static Func<PostOffice, IComparable>[] _sortComparisons = new Func<PostOffice, IComparable>[] 
+        {
+            null,
+            (fir) => int.Parse(fir.ClassOPS),
+            (fir) => fir.ShortName
+        };
+
+        private Func<PostOffice, bool>[] GetFilterPredicates(string filter)
+        {
+            return new Func<PostOffice, bool>[]
+            {
+                (arg) => true,//None filter
+                (arg) => arg.TypeOPS.ToLower() == filter.ToLower(),
+                (arg) => arg.Location.AdmArea.ToLower() == filter.ToLower()
+
+            };
+        }
+        
 
         private int _prefixCount;
 
@@ -41,7 +78,16 @@ namespace PostOfficesDataDisplayer.ViewModels
 
         public ObservableCollection<PostOffice> PostOfficesPrefix
         {
-            get => new ObservableCollection<PostOffice>( PostOffices.Take(PrefixCount));
+            get
+            {
+                return _sortComparisons[_sortPredicateIndex] != null ? new ObservableCollection<PostOffice>(PostOffices.
+                    Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]).Take(PrefixCount).
+                    OrderBy(_sortComparisons[_sortPredicateIndex])) :
+                    new ObservableCollection<PostOffice>(PostOffices.
+                    Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]).
+                    Take(PrefixCount));
+
+            }
 
         }
 
@@ -123,9 +169,61 @@ namespace PostOfficesDataDisplayer.ViewModels
                     if (dialog.ShowDialog() == true)
                     {
                         string filePath = dialog.FileName;
-                        this.PostOffices = new ObservableCollection<PostOffice>(IOHelper.ReadData(filePath));
-                        OnPropertyChanged("PostOfficesPrefix");
+                        List<PostOffice> fetchResult;
+                        bool success;
+                        (success, fetchResult) = IOHelper.ReadData(filePath);
+                        if (success)
+                        {
+                            this.PostOffices = new ObservableCollection<PostOffice>(fetchResult);
+                            OnPropertyChanged("PostOfficesPrefix");
+                        }
                     }
+                }));
+            }
+        }
+
+        private RelayCommand _sortByCommand;
+
+        public RelayCommand SortByCommand
+        {
+            get
+            {
+                return _sortByCommand ?? (_sortByCommand = new RelayCommand(obj =>
+                {
+                    int index = (int)obj;
+                    _sortPredicateIndex = index;
+                    OnPropertyChanged("PostOfficesPrefix");
+                }));
+            }
+        }
+
+        private RelayCommand _filterByCommand;
+
+        public RelayCommand FilterByCommand
+        {
+            get
+            {
+                return _filterByCommand ?? (_filterByCommand = new RelayCommand(obj =>
+                {
+                    int index = (int)obj;
+                    _filterPredicateIndex = index;
+                    OnPropertyChanged("PostOfficesPrefix");
+                }));
+            }
+        }
+
+        private RelayCommand _openFilterSettingCommand;
+
+        public RelayCommand OpenFilterSettingsCommand
+        {
+            get
+            {
+                return _openFilterSettingCommand ?? (_openFilterSettingCommand = new RelayCommand(obj =>
+                {
+                    int index = (int)obj;
+
+                    FilterSettingsWindow w = new FilterSettingsWindow(index, this);
+                    w.Show();
                 }));
             }
         }

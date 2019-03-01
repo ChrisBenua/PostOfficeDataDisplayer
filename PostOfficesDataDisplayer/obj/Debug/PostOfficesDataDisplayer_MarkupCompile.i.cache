@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\App.xaml
-3-850660276
+5-171421748
 
-18529517509
+19851082362
 13-1505183044
-MainWindow.xaml;Templates\RoundButton.xaml;UserControls\NumericUpDownElement.xaml;
+FilterSettingsWindow.xaml;MainWindow.xaml;Styles\RoundBorder.xaml;Templates\RoundButton.xaml;UserControls\NumericUpDownElement.xaml;
 
 True
 

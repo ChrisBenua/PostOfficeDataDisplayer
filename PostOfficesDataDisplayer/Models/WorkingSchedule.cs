@@ -27,11 +27,11 @@ namespace PostOfficesDataDisplayer.Models
 
         public string WorkingHoursExtra
         {
-            get => _workingHours;
+            get => _workingHoursExtra;
 
             set
             {
-                _workingHours = value;
+                _workingHoursExtra = value;
                 OnPropertyChanged();
             }
         }

@@ -31,8 +31,27 @@ namespace PostOfficesDataDisplayer
             viewModel = new PostOfficeDisplayerViewModel();
             InitializeComponent();
 
-            mHintTextBox.Text = "Всего записей" + Environment.NewLine + "в таблице";
+            mSortByNone.Command = viewModel.SortByCommand;
+            mSortByNone.CommandParameter = 0;
 
+            mSortByClassOPS.Command = viewModel.SortByCommand;
+            mSortByClassOPS.CommandParameter = 1;
+
+            mSortByShortName.Command = viewModel.SortByCommand;
+            mSortByShortName.CommandParameter = 2;
+
+            mFilterByNone.Command = viewModel.FilterByCommand;
+            mFilterByNone.CommandParameter = 0;
+
+            mFilterByTypeOPS.Command = viewModel.OpenFilterSettingsCommand;
+            mFilterByTypeOPS.CommandParameter = 1;
+
+            mFilterByAdmArea.Command = viewModel.OpenFilterSettingsCommand;
+            mFilterByAdmArea.CommandParameter = 2;
+
+
+            mHintTextBox.Text = "Всего записей" + Environment.NewLine + "в таблице";
+            
             viewModel.PrefixCount = mUpDownControl.InitialValue;
             mAddButton.Command = viewModel.AddCommand;
             mDeleteButton.Command = viewModel.DeleteCommand;
@@ -45,8 +64,8 @@ namespace PostOfficesDataDisplayer
 
             mOpenFile.Command = viewModel.OpenFileCommand;
             dataGrid.AutoGenerateColumns = false;
-
-            dataGrid.ItemsSource = viewModel.PostOffices;
+            //dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
+            //dataGrid.ItemsSource = viewModel.PostOffices;
 
             for (int i = 0; i < PostOffice.PropertieNames.Length; ++i)
             {
@@ -70,13 +89,21 @@ namespace PostOfficesDataDisplayer
                 NotifyOnTargetUpdated = true,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             });
+
+            dataGrid.SetBinding(DataGrid.ItemsSourceProperty, new Binding()
+            {
+                Source = viewModel,
+                Path = new PropertyPath("PostOfficesPrefix"),
+                NotifyOnSourceUpdated = true,
+            }); 
+
             this.mUpDownControl.ViewModel.MaxValue = 0;
             mUpDownControl.ViewModel.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == "Value")
                 {
                     this.viewModel.PrefixCount = mUpDownControl.ViewModel.Value;
-                    this.dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
+                    //this.dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
                 }
                 
             };
@@ -86,7 +113,7 @@ namespace PostOfficesDataDisplayer
                 if (e.PropertyName == "PostOfficesPrefix")
                 {
                     this.mUpDownControl.ViewModel.MaxValue = this.viewModel.PostOffices.Count;
-                    this.dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
+                    //this.dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
                 }
 
                 if (e.PropertyName == "PostOffices")
@@ -112,10 +139,10 @@ namespace PostOfficesDataDisplayer
         {
             TextBox current = (sender as TextBox);
             int helper;
-            if (!int.TryParse(current.Text + e.Text, out helper) || (current.Text + e.Text).Length > PostOfficeDisplayerViewModel.MaxLenForNumberColumns)
+            if (!int.TryParse(current.Text + e.Text, out helper) || (current.Text + e.Text).Length > PostOfficeDisplayerViewModel.MaxLenForIntColumns)
             {
                 e.Handled = true;
-                MessageBox.Show("Only numbers allowed", "Wrong format");
+                MessageBox.Show("Only numbers allowed", "Wrong format or too big number");
             }
         }
 
@@ -125,7 +152,7 @@ namespace PostOfficesDataDisplayer
             double helper;
             if (e.Text != "." || (e.Text.Count(ch => ch == '.') + current.Text.Count(ch => ch =='.')) != 1)
             {
-                if (!double.TryParse(current.Text + e.Text, out helper) || (current.Text + e.Text).Length > PostOfficeDisplayerViewModel.MaxLenForNumberColumns)
+                if (!double.TryParse(current.Text + e.Text, out helper) || (current.Text + e.Text).Length > PostOfficeDisplayerViewModel.MaxLenForDoubleColumns)
                 {
                     e.Handled = true;
                     MessageBox.Show("Only numbers allowed", "Wrong format");

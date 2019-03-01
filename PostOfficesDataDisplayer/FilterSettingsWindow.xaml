@@ -1,0 +1,62 @@
+﻿<Window x:Class="PostOfficesDataDisplayer.FilterSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostOfficesDataDisplayer"
+        mc:Ignorable="d"
+        Title="FilterSettingsWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="0.3*"></RowDefinition>
+
+
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource BorderStyle}" MaxHeight="100"
+                Margin="40">
+            <TextBox x:Name="mFilterStrTextBox" Background="Transparent" BorderBrush="Transparent" 
+                     TextAlignment="Center" Height="25" Margin="40, 0">
+            </TextBox>
+        </Border>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" IsHitTestVisible="False" Text="Enter filter string"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkGray">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=mFilterStrTextBox}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <Button x:Name="mApplyButton" Grid.Column="1" Grid.Row="2" Template="{StaticResource RoundButton}"
+                Background="Aqua" MaxHeight="50" MaxWidth="200" Content="Next">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=mFilterStrTextBox}" Value="">
+                            <Setter Property="IsEnabled" Value="False"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        
+    </Grid>
+</Window>

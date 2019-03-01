@@ -18,3 +18,6 @@ C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplaye
 C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\obj\Debug\PostOfficesDataDisplayer.pdb
 C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\obj\Debug\App.baml
 C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\obj\Debug\Templates\RoundButton.baml
+C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\obj\Debug\FilterSettingsWindow.g.cs
+C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\obj\Debug\FilterSettingsWindow.baml
+C:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\obj\Debug\Styles\RoundBorder.baml
