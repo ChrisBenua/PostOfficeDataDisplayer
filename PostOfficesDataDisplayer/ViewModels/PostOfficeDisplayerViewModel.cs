@@ -81,11 +81,11 @@ namespace PostOfficesDataDisplayer.ViewModels
             get
             {
                 return _sortComparisons[_sortPredicateIndex] != null ? new ObservableCollection<PostOffice>(PostOffices.
-                    Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]).Take(PrefixCount).
-                    OrderBy(_sortComparisons[_sortPredicateIndex])) :
-                    new ObservableCollection<PostOffice>(PostOffices.
+                    Take(PrefixCount).
                     Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]).
-                    Take(PrefixCount));
+                    OrderBy(_sortComparisons[_sortPredicateIndex])) :
+                    new ObservableCollection<PostOffice>(PostOffices.Take(PrefixCount).
+                    Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]));
 
             }
 
@@ -192,6 +192,8 @@ namespace PostOfficesDataDisplayer.ViewModels
                 {
                     int index = (int)obj;
                     _sortPredicateIndex = index;
+                    string[] arr = new string[] { "None", "ClassOPS", "ShortName"};
+                    SortByText = "Sort By" + Environment.NewLine + arr[index];
                     OnPropertyChanged("PostOfficesPrefix");
                 }));
             }
@@ -207,6 +209,8 @@ namespace PostOfficesDataDisplayer.ViewModels
                 {
                     int index = (int)obj;
                     _filterPredicateIndex = index;
+                    string[] arr = new string[] { "None", "TypeOPS", "AdmArea" };
+                    FilterByText = "Filter By" + Environment.NewLine + arr[index];
                     OnPropertyChanged("PostOfficesPrefix");
                 }));
             }
@@ -228,13 +232,80 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        private RelayCommand _saveToFileCommand;
+
+        public RelayCommand SaveToFileCommand
+        {
+            get
+            {
+                return _saveToFileCommand ?? (_saveToFileCommand = new RelayCommand(obj => 
+                {
+                   
+                    SaveFileDialog dialog = new SaveFileDialog();
+                    dialog.DefaultExt = "csv";
+                    if (dialog.ShowDialog() == true)
+                    {
+                        string filePath = dialog.FileName;
+                        IOHelper.WriteData(this.PostOfficesPrefix, filePath, false);
+                    }
+                }));
+            }
+        }
+
+        private RelayCommand _rewriteFileCommand;
+
+        public RelayCommand RewriteFileCommand
+        {
+            get
+            {
+                return _rewriteFileCommand ?? (_rewriteFileCommand = new RelayCommand(obj =>
+                {
+                    bool append = (bool)obj;
+
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    dialog.Filter = "Excel Files|*.csv;";
+                    dialog.DefaultExt = ".csv";
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        IOHelper.WriteData(PostOfficesPrefix, dialog.FileName, append);
+                    }
+
+                }));
+            }
+        }
+
+        private string _sortByText = "Sort By \nNone";
+
+        public string SortByText
+        {
+            get => _sortByText;
+
+            set
+            {
+                _sortByText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _filterByText = "Filter By\nNone";
+
+        public string FilterByText
+        {
+            get => _filterByText;
+
+            set
+            {
+                _filterByText = value;
+                OnPropertyChanged();
+            }
+        }
+
         public PostOfficeDisplayerViewModel()
         {
             PostOffices = new ObservableCollection<PostOffice>();
         }
-
         
-
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -15,7 +15,9 @@
             <ColumnDefinition Width="160"></ColumnDefinition>
             <ColumnDefinition Width="160"></ColumnDefinition>
 
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
@@ -26,9 +28,9 @@
 
         <Menu Grid.ColumnSpan="10">
             <MenuItem Header="Save..." FontSize="18">
-                <MenuItem Header="В новый файл"></MenuItem>
-                <MenuItem Header="Добавить в существующий файл"></MenuItem>
-                <MenuItem Header="Заменить содержимое файла"></MenuItem>
+                <MenuItem x:Name="mSaveToNewFile" Header="В новый файл"></MenuItem>
+                <MenuItem x:Name="mAppendToFile" Header="Добавить в существующий файл"></MenuItem>
+                <MenuItem x:Name="mReplaceFile" Header="Заменить содержимое файла"></MenuItem>
             </MenuItem>
             <MenuItem x:Name="mOpenFile" Header="Open" FontSize="18"></MenuItem>
             <MenuItem Header="Sort By" FontSize="18">
@@ -41,6 +43,7 @@
                 <MenuItem x:Name="mFilterByTypeOPS" Header="TypeOPS"></MenuItem>
                 <MenuItem x:Name="mFilterByAdmArea" Header="AdmArea"></MenuItem>
             </MenuItem>
+            <MenuItem x:Name="mFindClosest" Header="Find Closest"></MenuItem>
         </Menu>
 
         <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="0" InitialValue="0" Width="40" x:Name="mUpDownControl"
@@ -49,8 +52,10 @@
         <Button x:Name="mAddButton" Grid.Row="1" Grid.Column="3" Template="{StaticResource RoundButton}" Background="LightGreen"
                 Margin="10, 5" Content="Add Entity"></Button>
 
-        <Button x:Name="mDeleteButton" Grid.Row="1" Grid.Column="4" Template="{StaticResource RoundButton}" Background="Red"
-                Margin="10, 5" Content="Remove Entity"></Button>
+        <Button x:Name="mDeleteButton" Grid.Row="1" Grid.Column="4" Template="{StaticResource RoundButton}" Background="LightGray"
+                Margin="10, 5" Content="Remove Entity" IsEnabled="False"></Button>
+
+       
         
         <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.ColumnSpan="10"></DataGrid>
 
@@ -59,6 +64,13 @@
                   >Всего записей в таблице</TextBox>
 
         <TextBlock x:Name="mDataSetSizeTextBox" Grid.Column="2" Grid.Row="1" TextAlignment="Center" Text="0" Padding="0, 10, 0, 0"></TextBlock>
-    
+
+
+        <TextBox x:Name="mfilterTextBox" Grid.Column="5" Grid.Row="1" BorderBrush="Transparent" IsReadOnly="True"
+                 AcceptsReturn="True"></TextBox>
+
+        <TextBox x:Name="mSortTextBox" Grid.Column="6" Grid.Row="1" BorderBrush="Transparent" IsReadOnly="True"
+                 AcceptsReturn="True"></TextBox>
+        
     </Grid>
 </Window>

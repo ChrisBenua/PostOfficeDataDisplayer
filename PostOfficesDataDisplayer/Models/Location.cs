@@ -23,8 +23,9 @@ namespace PostOfficesDataDisplayer.Models
         public bool Valid()
         {
             double helper;
-            return ((double.TryParse(XCoordStr ?? "", out helper) || (XCoordStr ?? "").Length == 0) && 
+            var res = ((double.TryParse(XCoordStr ?? "", out helper) || (XCoordStr ?? "").Length == 0) && 
                 (double.TryParse(YCoordStr ?? "", out helper) || (YCoordStr ?? "").Length == 0));
+            return res;
         }
 
         public string XCoordStr

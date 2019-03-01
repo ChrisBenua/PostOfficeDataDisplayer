@@ -62,10 +62,36 @@ namespace PostOfficesDataDisplayer
             dataGrid.CanUserSortColumns = false;
             dataGrid.CanUserResizeColumns = true;
 
+            dataGrid.AlternationCount = 2;
+            dataGrid.RowBackground = Brushes.White;
+            dataGrid.AlternatingRowBackground = Brushes.WhiteSmoke;
+
             mOpenFile.Command = viewModel.OpenFileCommand;
             dataGrid.AutoGenerateColumns = false;
             //dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
             //dataGrid.ItemsSource = viewModel.PostOffices;
+
+            mSaveToNewFile.Command = viewModel.SaveToFileCommand;
+
+            mAppendToFile.Command = viewModel.RewriteFileCommand;
+            mAppendToFile.CommandParameter = true;
+
+            mReplaceFile.Command = viewModel.RewriteFileCommand;
+            mReplaceFile.CommandParameter = false;
+
+            mSortTextBox.SetBinding(TextBox.TextProperty, new Binding()
+            {
+                Source = viewModel,
+                Path = new PropertyPath("SortByText"),
+                NotifyOnSourceUpdated = true
+            });
+
+            mfilterTextBox.SetBinding(TextBox.TextProperty, new Binding()
+            {
+                Source = viewModel,
+                Path = new PropertyPath("FilterByText"),
+                NotifyOnSourceUpdated = true
+            });
 
             for (int i = 0; i < PostOffice.PropertieNames.Length; ++i)
             {
@@ -85,7 +111,7 @@ namespace PostOfficesDataDisplayer
             {
                 Source = viewModel,
                 Path = new PropertyPath("SelectedOffice"),
-                NotifyOnSourceUpdated = true,
+                //NotifyOnSourceUpdated = true,
                 NotifyOnTargetUpdated = true,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             });
@@ -119,6 +145,20 @@ namespace PostOfficesDataDisplayer
                 if (e.PropertyName == "PostOffices")
                 {
                     this.mDataSetSizeTextBox.Text = this.viewModel.PostOffices.Count.ToString();
+                }
+
+                if (e.PropertyName == "SelectedOffice")
+                {
+                    if (viewModel.SelectedOffice == null)
+                    {
+                        this.mDeleteButton.Background = Brushes.LightGray;
+                        this.mDeleteButton.IsEnabled = false;
+                    }
+                    else
+                    {
+                        this.mDeleteButton.Background = Brushes.Red;
+                        this.mDeleteButton.IsEnabled = true;
+                    }
                 }
             };
             
@@ -191,8 +231,8 @@ namespace PostOfficesDataDisplayer
                     {
                         Path = new PropertyPath(PostOffice.PropertieNames[index]),
                         Mode = BindingMode.TwoWay,
-                        NotifyOnSourceUpdated = true,
-                        NotifyOnTargetUpdated = true,
+                        //NotifyOnSourceUpdated = true,
+                        //NotifyOnTargetUpdated = true,
                         UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
                         StringFormat = "G4"
                     });
@@ -213,8 +253,8 @@ namespace PostOfficesDataDisplayer
                 {
                     Path = new PropertyPath(PostOffice.PropertieNames[index]),
                     Mode = BindingMode.TwoWay,
-                    NotifyOnSourceUpdated = true,
-                    NotifyOnTargetUpdated = true,
+                    //NotifyOnSourceUpdated = true,
+                    //NotifyOnTargetUpdated = true,
                     UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
                 });
             }

@@ -12,14 +12,46 @@ namespace PostOfficesDataDisplayer.Utils
 {
     public static class IOHelper
     {
-        public static void WriteHeaders()
+        public static void WriteHeaders(string filePath)
         {
-
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath))
+            {
+                file.WriteLine("ROWNUM;FullName;ShortName;PostalCode;AdmArea;District;" +
+                    "Address;AddressExtraInfo;ChiefPhone;DeliveryDepartmentPhone;TelegraphPhone;" +
+                    "WorkingHours;WorkingHoursExtraInfo;ClassOPS;TypeOPS;MMP;CloseFlag;CloseExtraInfo;" +
+                    "UNOM;X_WGS84;Y_WGS84;GLOBALID;");
+            }
         }
 
-        public static void WriteData(ObservableCollection<PostOffice> postOffices)
+        private static string Wrap(string s)
         {
+            return "\"" + s + "\"";
+        }
 
+        private static string SerializePostOffice(PostOffice p)
+        {
+            string res = "";
+            res += p.RowNum + ";" + String.Join(";", (new string[] { p.FullName, p.ShortName, p.Contacts.PostalCode, p.Location.AdmArea,
+            p.Location.District, p.Contacts.Address, p.Contacts.AddressExtraInfo, p.Contacts.ChiefPhone, p.Contacts.DeliveryDepartmentPhone,
+            p.Contacts.TelegraphPhone, p.Schedule.WorkingHours, p.Schedule.WorkingHoursExtra, p.ClassOPS.ToString(), p.TypeOPS,
+            p.MMR, p.CloseFlag, p.CloseExtraInfo, p.UNOM, p.Location.Coords.X.ToString(), p.Location.Coords.Y.ToString(), p.GlobalID }).ToList().
+            ConvertAll<string>(s => Wrap(s)));
+            return res;
+        }
+
+        public static void WriteData(ObservableCollection<PostOffice> postOffices, string filePath, bool append)
+        {
+            if (!append)
+            {
+                WriteHeaders(filePath);
+            }
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath, true))
+            {
+                foreach (var el in postOffices)
+                {
+                    file.WriteLine(SerializePostOffice(el));
+                }
+            }
         }
 
         public static (bool, List<PostOffice>) ReadData(string filePath)
