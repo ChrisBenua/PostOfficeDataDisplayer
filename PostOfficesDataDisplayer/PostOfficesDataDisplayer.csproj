@@ -55,7 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FilterSettingsWindow.xaml.cs">
+    <Compile Include="ViewModels\FindClosestViewModel.cs" />
+    <Compile Include="Views\FilterSettingsWindow.xaml.cs">
       <DependentUpon>FilterSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs" />
@@ -69,11 +70,15 @@
     <Compile Include="Utils\IOHelper.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="ViewModels\PostOfficeDisplayerViewModel.cs" />
-    <Page Include="FilterSettingsWindow.xaml">
+    <Page Include="Views\FilterSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\FindClosestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -81,7 +86,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\FindClosestWindow.xaml.cs">
+      <DependentUpon>FindClosestWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

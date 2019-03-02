@@ -1,7 +1,8 @@
 ﻿
 FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\App.xaml;;
-FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\FilterSettingsWindow.xaml;;
-FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\MainWindow.xaml;;
+FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\Views\FilterSettingsWindow.xaml;;
+FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\Views\FindClosestWindow.xaml;;
+FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\Views\MainWindow.xaml;;
 FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\Styles\RoundBorder.xaml;;
 FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\Templates\RoundButton.xaml;;
 FC:\Users\Christian\source\repos\PostOfficesDataDisplayer\PostOfficesDataDisplayer\UserControls\NumericUpDownElement.xaml;;

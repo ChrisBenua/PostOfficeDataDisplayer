@@ -67,14 +67,7 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                if (validateCoords?.Invoke(value) ?? true)
-                {
-                    _x = value;
-                }
-                else
-                {
-                    OnIncorrectCoordsEntered();
-                }
+                _x = value;
             }
         }
 
@@ -84,14 +77,7 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                if (validateCoords?.Invoke(value) ?? true)
-                {
-                    _x = value;
-                }
-                else
-                {
-                    OnIncorrectCoordsEntered();
-                }
+                _y = value;                
             }
         }
 

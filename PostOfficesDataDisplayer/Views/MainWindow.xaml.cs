@@ -49,6 +49,7 @@ namespace PostOfficesDataDisplayer
             mFilterByAdmArea.Command = viewModel.OpenFilterSettingsCommand;
             mFilterByAdmArea.CommandParameter = 2;
 
+            mSortByDistToPoint.Command = viewModel.FindClosestCommand;
 
             mHintTextBox.Text = "Всего записей" + Environment.NewLine + "в таблице";
             
@@ -192,7 +193,8 @@ namespace PostOfficesDataDisplayer
             double helper;
             if (e.Text != "." || (e.Text.Count(ch => ch == '.') + current.Text.Count(ch => ch =='.')) != 1)
             {
-                if (!double.TryParse(current.Text + e.Text, out helper) || (current.Text + e.Text).Length > PostOfficeDisplayerViewModel.MaxLenForDoubleColumns)
+                if (!double.TryParse(current.Text + e.Text, out helper) || (current.Text + e.Text).Length > 
+                    PostOfficeDisplayerViewModel.MaxLenForDoubleColumns || e.Text.Contains(","))
                 {
                     e.Handled = true;
                     MessageBox.Show("Only numbers allowed", "Wrong format");

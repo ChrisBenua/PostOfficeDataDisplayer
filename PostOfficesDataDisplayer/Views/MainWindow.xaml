@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PostOfficesDataDisplayer"
         xmlns:usercontrols="clr-namespace:PostOfficesDataDisplayer.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="820" MinWidth="820">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"></ColumnDefinition>
@@ -15,7 +15,7 @@
             <ColumnDefinition Width="160"></ColumnDefinition>
             <ColumnDefinition Width="160"></ColumnDefinition>
 
-            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.6*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
@@ -37,13 +37,13 @@
                 <MenuItem x:Name="mSortByNone" Header="None"></MenuItem>
                 <MenuItem x:Name="mSortByClassOPS" Header="ClassOPS"></MenuItem>
                 <MenuItem x:Name="mSortByShortName" Header="ShortName"></MenuItem>
+                <MenuItem x:Name="mSortByDistToPoint" Header="Distance To Coords"></MenuItem>
             </MenuItem>
             <MenuItem Header="Filter By" FontSize="18">
                 <MenuItem x:Name="mFilterByNone" Header="None"></MenuItem>
                 <MenuItem x:Name="mFilterByTypeOPS" Header="TypeOPS"></MenuItem>
                 <MenuItem x:Name="mFilterByAdmArea" Header="AdmArea"></MenuItem>
             </MenuItem>
-            <MenuItem x:Name="mFindClosest" Header="Find Closest"></MenuItem>
         </Menu>
 
         <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="0" InitialValue="0" Width="40" x:Name="mUpDownControl"

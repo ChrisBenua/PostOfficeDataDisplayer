@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using PostOfficesDataDisplayer.Models;
 using PostOfficesDataDisplayer.Utils;
+using PostOfficesDataDisplayer.Views;
 
 namespace PostOfficesDataDisplayer.ViewModels
 {
@@ -41,12 +42,23 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
-        private static Func<PostOffice, IComparable>[] _sortComparisons = new Func<PostOffice, IComparable>[] 
+        private Func<PostOffice, IComparable>[] _sortComparisons;
+        
+        public Func<PostOffice, IComparable>[] SortComparisons
         {
-            null,
-            (fir) => int.Parse(fir.ClassOPS),
-            (fir) => fir.ShortName
-        };
+            get
+            {
+                return _sortComparisons ?? (_sortComparisons = new Func<PostOffice, IComparable>[]
+                {
+                    null,
+                    (fir) => int.Parse(fir.ClassOPS),
+                    (fir) => fir.ShortName,
+                    (fir) => GetDist(fir)
+                });
+            }
+        }
+        
+        
 
         private Func<PostOffice, bool>[] GetFilterPredicates(string filter)
         {
@@ -80,10 +92,10 @@ namespace PostOfficesDataDisplayer.ViewModels
         {
             get
             {
-                return _sortComparisons[_sortPredicateIndex] != null ? new ObservableCollection<PostOffice>(PostOffices.
+                return SortComparisons[_sortPredicateIndex] != null ? new ObservableCollection<PostOffice>(PostOffices.
                     Take(PrefixCount).
                     Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]).
-                    OrderBy(_sortComparisons[_sortPredicateIndex])) :
+                    OrderBy(SortComparisons[_sortPredicateIndex])) :
                     new ObservableCollection<PostOffice>(PostOffices.Take(PrefixCount).
                     Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]));
 
@@ -273,6 +285,50 @@ namespace PostOfficesDataDisplayer.ViewModels
 
                 }));
             }
+        }
+
+        private RelayCommand _findClosestCommand;
+
+        public RelayCommand FindClosestCommand
+        {
+            get
+            {
+                return _findClosestCommand ?? (_findClosestCommand = new RelayCommand(obj =>
+                {
+                    FindClosestWindow w = new FindClosestWindow(this);
+                    w.Show();
+                }));
+            }
+        }
+
+        private Point _center;
+
+        private double GetDist(PostOffice p1)
+        {
+            //Haversine formula [https://en.wikipedia.org/wiki/Haversine_formula]
+            double EarthRadius = 6371;
+            double deltaLat = DegreesToRadians(p1.Location.Coords.X - _center.X);
+            double deltaLon = DegreesToRadians(p1.Location.Coords.Y - _center.Y);
+            double hav = Math.Sin(deltaLat / 2) * Math.Sin(deltaLat / 2) +
+                         Math.Cos(DegreesToRadians(p1.Location.Coords.X)) * Math.Cos(DegreesToRadians(_center.X)) *
+                         Math.Sin(deltaLon / 2) * Math.Sin(deltaLon / 2);
+
+            double ans = EarthRadius * 2 * Math.Atan2(Math.Sqrt(hav), Math.Sqrt(1 - hav));
+            return ans;
+        }
+
+        private double DegreesToRadians(double deg)
+        {
+            return deg * Math.PI / 180;
+
+        }
+
+        public void SetCenterPoint(Point center)
+        {
+            _center = center;
+            _sortPredicateIndex = 3;
+            SortByText = $"Sort By\nDist To:({center.X.ToString("F6")}, {center.Y.ToString("F6")})";
+            OnPropertyChanged("PostOfficesPrefix");
         }
 
         private string _sortByText = "Sort By \nNone";

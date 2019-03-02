@@ -197,7 +197,7 @@ namespace PostOfficesDataDisplayer.Models
                           string xcoord, string ycoord, string globalID)
         {
             this.Contacts = new OfficeContacts(postalCode, address, addressExtraInfo, chiefPhone, deliveryDepPhone, telegraphPhone);
-            this.Location = new Location(xcoord, ycoord, district, admArea);
+            this.Location = new Location(xcoord.Replace(",", "."), ycoord.Replace(",", "."), district, admArea);
             this.Schedule = new WorkingSchedule(workingHours, workingHoursExtra);
             this.ClassOPS = classOps;
             this.TypeOPS = typeOPS;
