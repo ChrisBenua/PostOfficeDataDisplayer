@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Microsoft.Win32;
 using PostOfficesDataDisplayer.Models;
 using PostOfficesDataDisplayer.Utils;
@@ -80,13 +81,16 @@ namespace PostOfficesDataDisplayer.ViewModels
 
             set
             {
-                _prefixCount = value;
-                OnPropertyChanged();
-                OnPropertyChanged("PostOfficesPrefix");
+                if (value != _prefixCount)
+                {
+                    _prefixCount = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged("PostOfficesPrefix");
+                }
             }
         }
 
-        private ObservableCollection<PostOffice> _postOfficesPrefix;
+        //private ObservableCollection<PostOffice> _postOfficesPrefix;
 
         public ObservableCollection<PostOffice> PostOfficesPrefix
         {
@@ -103,6 +107,19 @@ namespace PostOfficesDataDisplayer.ViewModels
 
         }
 
+        private Action _onInvalidCoordsDelegate;
+
+        public Action OnInvalidCoordsDelegate
+        {
+            get
+            {
+                return _onInvalidCoordsDelegate ?? (_onInvalidCoordsDelegate = new Action( () =>
+                {
+                    MessageBox.Show("Invalid coords", "Wrong format");
+                }));
+            }
+        }
+
         private ObservableCollection<PostOffice> _postOffices;
 
         public ObservableCollection<PostOffice> PostOffices
@@ -112,7 +129,27 @@ namespace PostOfficesDataDisplayer.ViewModels
             set
             {
                 _postOffices = value;
-                _postOffices.CollectionChanged += (s, e) => OnPropertyChanged("PostOffices");
+
+
+                _postOffices.ToList().ForEach(p => p.Location.Coords.IncorrectCoordsEntered += () =>
+                {
+                    OnInvalidCoordsDelegate?.Invoke();
+                });
+                _postOffices.CollectionChanged += (s, e) => {
+                    if (e.NewItems != null)
+                    {
+                        foreach (var el in e.NewItems)
+                        {
+                            (el as PostOffice).Location.Coords.IncorrectCoordsEntered += () =>
+                            {
+                                OnInvalidCoordsDelegate?.Invoke();
+                            };
+                        }
+                    }
+
+                    OnPropertyChanged("PostOffices");
+
+                };
                 OnPropertyChanged();
                 OnPropertyChanged("PostOfficesPrefix");
             }
@@ -301,7 +338,7 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
-        private Point _center;
+        private Models.Point _center;
 
         private double GetDist(PostOffice p1)
         {
@@ -323,7 +360,7 @@ namespace PostOfficesDataDisplayer.ViewModels
 
         }
 
-        public void SetCenterPoint(Point center)
+        public void SetCenterPoint(Models.Point center)
         {
             _center = center;
             _sortPredicateIndex = 3;

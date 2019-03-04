@@ -111,6 +111,7 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
 
 
             OnPropertyChanged("Text");
+            OnPropertyChanged("Value");
         }
 
         private RelayCommand _increaseCommand;

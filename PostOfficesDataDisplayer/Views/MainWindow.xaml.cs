@@ -72,6 +72,8 @@ namespace PostOfficesDataDisplayer
             //dataGrid.ItemsSource = viewModel.PostOfficesPrefix;
             //dataGrid.ItemsSource = viewModel.PostOffices;
 
+            dataGrid.SelectionMode = DataGridSelectionMode.Single;
+
             mSaveToNewFile.Command = viewModel.SaveToFileCommand;
 
             mAppendToFile.Command = viewModel.RewriteFileCommand;
@@ -137,6 +139,7 @@ namespace PostOfficesDataDisplayer
 
             this.viewModel.PropertyChanged += (s, e) =>
             {
+
                 if (e.PropertyName == "PostOfficesPrefix")
                 {
                     this.mUpDownControl.ViewModel.MaxValue = this.viewModel.PostOffices.Count;
@@ -189,7 +192,7 @@ namespace PostOfficesDataDisplayer
 
         private void DoubleNumberTextBoxPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            TextBox current = (sender as TextBox);
+            /* TextBox current = (sender as TextBox);
             double helper;
             if (e.Text != "." || (e.Text.Count(ch => ch == '.') + current.Text.Count(ch => ch =='.')) != 1)
             {
@@ -199,7 +202,7 @@ namespace PostOfficesDataDisplayer
                     e.Handled = true;
                     MessageBox.Show("Only numbers allowed", "Wrong format");
                 }
-            }
+            }*/
         }
 
         private void StringTextBoxPreviewInput(object sender, TextCompositionEventArgs e)

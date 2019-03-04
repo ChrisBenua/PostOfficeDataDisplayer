@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using PostOfficesDataDisplayer.Utils;
+using PostOfficesDataDisplayer.Models;
 
 namespace PostOfficesDataDisplayer.ViewModels
 {
-    public class FindClosestViewModel: INotifyPropertyChanged
+    public class FindClosestViewModel : INotifyPropertyChanged
     {
         private double _x;
 
@@ -28,7 +29,7 @@ namespace PostOfficesDataDisplayer.ViewModels
             IsApplyButtonEnabled = _isYCoordOk && _isXCoordOk;
         }
 
-        public string XCoordStr
+        /*public string XCoordStr
         {
             get => _xCoordStr;
 
@@ -73,6 +74,28 @@ namespace PostOfficesDataDisplayer.ViewModels
                     OnPropertyChanged();
                 }
                 UpdateApplyButton();
+            }
+        }*/
+
+
+
+        private Models.Point _coords;
+
+        public Models.Point Coords
+        {
+            get => _coords;
+
+            set
+            {
+                _coords = value;
+                _coords.PropertyChanged += (s, e) =>
+                {
+                    this._isYCoordOk = _coords.YCoordStr.Length > 0;
+                    this._isXCoordOk = _coords.XCoordStr.Length > 0;
+                    this.UpdateApplyButton();
+                    this.OnPropertyChanged("Coords");
+                };
+                OnPropertyChanged();
             }
         }
 
@@ -135,7 +158,12 @@ namespace PostOfficesDataDisplayer.ViewModels
 
         public void OnChosenCoordinates()
         {
-            ChosenCoordinates?.Invoke(_x, _y);
+            ChosenCoordinates?.Invoke(Coords.X, Coords.Y);
+        }
+
+        public FindClosestViewModel()
+        {
+            this.Coords = new Models.Point("", "");
         }
 
         public event Action<double, double> ChosenCoordinates;

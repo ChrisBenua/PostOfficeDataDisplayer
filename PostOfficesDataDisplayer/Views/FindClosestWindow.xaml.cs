@@ -44,7 +44,7 @@ namespace PostOfficesDataDisplayer.Views
 
             mxCoordTextBox.SetBinding(TextBox.TextProperty, new Binding()
             {
-                Source = viewModel,
+                Source = viewModel.Coords,
                 Path = new PropertyPath("XCoordStr"),
                 Mode = BindingMode.TwoWay,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
@@ -52,7 +52,7 @@ namespace PostOfficesDataDisplayer.Views
 
             myCoordTextBox.SetBinding(TextBox.TextProperty, new Binding()
             {
-                Source = viewModel,
+                Source = viewModel.Coords,
                 Path = new PropertyPath("YCoordStr"),
                 Mode = BindingMode.TwoWay,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged

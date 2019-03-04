@@ -46,7 +46,7 @@
         </TextBlock>
 
         <Button x:Name="mApplyButton" Grid.Column="1" Grid.Row="2" Template="{StaticResource RoundButton}"
-                Background="Aqua" MaxHeight="50" MaxWidth="200" Content="Next">
+                Background="LightGray" MaxHeight="50" MaxWidth="200" Content="Next">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Style.Triggers>

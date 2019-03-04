@@ -35,12 +35,24 @@ namespace PostOfficesDataDisplayer.Models
             set
             {
                 double helper;
-                if (double.TryParse(value, out helper))
+
+                if (!double.TryParse(value, out helper) && value.Length > 0 || !(validateCoords?.Invoke(helper) ?? true) || value.Contains(","))
+                {
+                    OnIncorrectCoordsEntered();
+                }
+                else
+                {
+                    X = helper;
+                    _xcoordStr = value;
+                    OnPropertyChanged();
+                }
+
+                /*if (double.TryParse(value, out helper))
                 {
                     X = helper;
                 }
                 _xcoordStr = value;
-                OnPropertyChanged();
+                OnPropertyChanged();*/
 
             }
         }
@@ -52,12 +64,24 @@ namespace PostOfficesDataDisplayer.Models
             set
             {
                 double helper;
-                if (double.TryParse(value, out helper))
+
+                if (!double.TryParse(value, out helper) && value.Length > 0 || !(validateCoords?.Invoke(helper) ?? true) || value.Contains(","))
+                {
+                    OnIncorrectCoordsEntered();
+                }
+                else
+                {
+                    Y = helper;
+                    _ycoordStr = value;
+                    OnPropertyChanged();
+                }
+
+                /*if (double.TryParse(value, out helper))
                 {
                     Y = helper;
                 }
                 _ycoordStr = value;
-                OnPropertyChanged();
+                OnPropertyChanged();*/
             }
         }
 
@@ -85,12 +109,16 @@ namespace PostOfficesDataDisplayer.Models
         {
             X = x;
             Y = y;
+
+            this.validateCoords = new Predicate<double>(arg => Math.Abs(arg) <= 90);
         }
 
         public Point(string x, string y)
         {
             XCoordStr = x;
             YCoordStr = y;
+
+            this.validateCoords = new Predicate<double>(arg => Math.Abs(arg) <= 90);
         }
 
         public Point(Point other)
