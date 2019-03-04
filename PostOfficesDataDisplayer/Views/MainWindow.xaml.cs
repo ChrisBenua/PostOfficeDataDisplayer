@@ -49,6 +49,8 @@ namespace PostOfficesDataDisplayer
             mFilterByAdmArea.Command = viewModel.OpenFilterSettingsCommand;
             mFilterByAdmArea.CommandParameter = 2;
 
+            mOpenOnMap.Command = viewModel.OpenOnMapCommand;
+
             mSortByDistToPoint.Command = viewModel.FindClosestCommand;
 
             mHintTextBox.Text = "Всего записей" + Environment.NewLine + "в таблице";
@@ -82,6 +84,8 @@ namespace PostOfficesDataDisplayer
             mReplaceFile.Command = viewModel.RewriteFileCommand;
             mReplaceFile.CommandParameter = false;
 
+            mSaveGEOJsonData.Command = viewModel.SaveAsGeoJsonCommand;
+
             mSortTextBox.SetBinding(TextBox.TextProperty, new Binding()
             {
                 Source = viewModel,
@@ -103,7 +107,7 @@ namespace PostOfficesDataDisplayer
                     CellTemplate = getTextColumnTemplate(i)
                 };
 
-                column.Width = 40;
+                column.Width = 80;
 
                 column.Header = PostOffice.PropertieNames[i].Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Last();
                 dataGrid.Columns.Add(column);

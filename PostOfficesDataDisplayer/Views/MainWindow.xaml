@@ -31,19 +31,22 @@
                 <MenuItem x:Name="mSaveToNewFile" Header="В новый файл"></MenuItem>
                 <MenuItem x:Name="mAppendToFile" Header="Добавить в существующий файл"></MenuItem>
                 <MenuItem x:Name="mReplaceFile" Header="Заменить содержимое файла"></MenuItem>
+                <MenuItem x:Name="mSaveGEOJsonData" Header="Сохранить как GEOJson"></MenuItem>
+
             </MenuItem>
             <MenuItem x:Name="mOpenFile" Header="Open" FontSize="18"></MenuItem>
             <MenuItem Header="Sort By" FontSize="18">
                 <MenuItem x:Name="mSortByNone" Header="None"></MenuItem>
                 <MenuItem x:Name="mSortByClassOPS" Header="ClassOPS"></MenuItem>
                 <MenuItem x:Name="mSortByShortName" Header="ShortName"></MenuItem>
-                <MenuItem x:Name="mSortByDistToPoint" Header="Distance To Coords"></MenuItem>
+                <MenuItem x:Name="mSortByDistToPoint" Header="Расстояние до точки"></MenuItem>
             </MenuItem>
             <MenuItem Header="Filter By" FontSize="18">
                 <MenuItem x:Name="mFilterByNone" Header="None"></MenuItem>
                 <MenuItem x:Name="mFilterByTypeOPS" Header="TypeOPS"></MenuItem>
                 <MenuItem x:Name="mFilterByAdmArea" Header="AdmArea"></MenuItem>
             </MenuItem>
+            <MenuItem x:Name="mOpenOnMap" Header="Map" FontSize="18"></MenuItem>
         </Menu>
 
         <usercontrols:NumericUpDownElement Grid.Row="1" Maximum="100" Minimum="0" InitialValue="0" Width="40" x:Name="mUpDownControl"

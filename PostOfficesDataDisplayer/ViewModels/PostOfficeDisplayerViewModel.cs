@@ -220,11 +220,30 @@ namespace PostOfficesDataDisplayer.ViewModels
                         string filePath = dialog.FileName;
                         List<PostOffice> fetchResult;
                         bool success;
-                        (success, fetchResult) = IOHelper.ReadData(filePath);
-                        if (success)
+                        try
                         {
-                            this.PostOffices = new ObservableCollection<PostOffice>(fetchResult);
-                            OnPropertyChanged("PostOfficesPrefix");
+                            (success, fetchResult) = IOHelper.ReadData(filePath);
+                            if (success)
+                            {
+                                this.PostOffices = new ObservableCollection<PostOffice>(fetchResult);
+                                OnPropertyChanged("PostOfficesPrefix");
+                            }
+                        }
+                        catch (System.IO.IOException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error while reading from file");
+                        }
+                        catch (System.UnauthorizedAccessException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in accessing/creating a file");
+                        }
+                        catch (System.ArgumentException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in file path");
+                        }
+                        catch (System.Security.SecurityException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Security Violation");
                         }
                     }
                 }));
@@ -317,7 +336,22 @@ namespace PostOfficesDataDisplayer.ViewModels
 
                     if (dialog.ShowDialog() == true)
                     {
-                        IOHelper.WriteData(PostOfficesPrefix, dialog.FileName, append);
+                        try
+                        {
+                            IOHelper.WriteData(PostOfficesPrefix, dialog.FileName, append);
+                        }
+                        catch (System.IO.IOException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in writing to file");
+                        }
+                        catch (System.UnauthorizedAccessException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in accessing/creating a file");
+                        }
+                        catch (System.ArgumentException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in file path");
+                        }
                     }
 
                 }));
@@ -334,6 +368,54 @@ namespace PostOfficesDataDisplayer.ViewModels
                 {
                     FindClosestWindow w = new FindClosestWindow(this);
                     w.Show();
+                }));
+            }
+        }
+
+        private RelayCommand _openOnMapCommand;
+
+        public RelayCommand OpenOnMapCommand
+        {
+            get
+            {
+                return _openOnMapCommand ?? (_openOnMapCommand = new RelayCommand(obj =>
+                {
+                    GEOJsonPostOfficeCollection collection = new GEOJsonPostOfficeCollection(this.PostOfficesPrefix);
+                    URLManager.OpenURL(collection.EscapedJSONString());
+                }));
+            }
+        }
+
+        private RelayCommand _saveAsGeoJsonCommand;
+
+        public RelayCommand SaveAsGeoJsonCommand
+        {
+            get
+            {
+                return _saveAsGeoJsonCommand ?? (_saveAsGeoJsonCommand = new RelayCommand(obj =>
+                {
+                    SaveFileDialog dialog = new SaveFileDialog();
+                    dialog.DefaultExt = ".geojson";
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        try
+                        {
+                            IOHelper.WriteGeoJson(dialog.FileName, this.PostOfficesPrefix);
+                        }
+                        catch (System.IO.IOException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in writing to file");
+                        }
+                        catch (System.UnauthorizedAccessException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in accessing/creating a file");
+                        }
+                        catch (System.ArgumentException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error in file path");
+                        }
+                    }
                 }));
             }
         }

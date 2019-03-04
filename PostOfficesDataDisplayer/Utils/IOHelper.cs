@@ -12,6 +12,19 @@ namespace PostOfficesDataDisplayer.Utils
 {
     public static class IOHelper
     {
+
+        public static void WriteGeoJson(string filePath, IList<PostOffice> postOffices)
+        {
+
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath))
+            {
+                GEOJsonPostOfficeCollection collection = new GEOJsonPostOfficeCollection(postOffices);
+                file.WriteLine(collection.JSONString());
+            }
+            
+            
+        }
+
         public static void WriteHeaders(string filePath)
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath))
@@ -41,6 +54,7 @@ namespace PostOfficesDataDisplayer.Utils
 
         public static void WriteData(ObservableCollection<PostOffice> postOffices, string filePath, bool append)
         {
+            
             if (!append)
             {
                 WriteHeaders(filePath);
@@ -51,15 +65,16 @@ namespace PostOfficesDataDisplayer.Utils
                 {
                     file.WriteLine(SerializePostOffice(el));
                 }
-            }
+            } 
         }
 
         public static (bool, List<PostOffice>) ReadData(string filePath)
         {
             List<PostOffice> postOffices = new List<PostOffice>();
-
-            var lines = System.IO.File.ReadAllLines(filePath);
-
+            string[] lines = null;
+            
+            lines = System.IO.File.ReadAllLines(filePath);
+            
             for (int i = 1; i < lines.Length; ++i)
             {
                 List<int> positions = new List<int>();
