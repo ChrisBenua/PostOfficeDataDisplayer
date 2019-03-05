@@ -5,18 +5,27 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using PostOfficesDataDisplayer.Utils;
 
 namespace PostOfficesDataDisplayer.Models
 {
     public class PostOffice: INotifyPropertyChanged
     {
 
-        public static readonly string[] PropertieNames = new string[] { "RowNum", "FullName", "ShortName", "Contacts.PostalCode",
+        public static readonly string[] PropertiesNames = new string[] { "RowNum", "FullName", "ShortName", "Contacts.PostalCode",
             "Location.AdmArea", "Location.District", "Contacts.Address", "Contacts.AddressExtraInfo", "Contacts.ChiefPhone",
             "Contacts.DeliveryDepartmentPhone", "Contacts.TelegraphPhone", "Schedule.WorkingHours", "Schedule.WorkingHoursExtra",
             "ClassOPS", "TypeOPS", "MMR", "CloseFlag", "CloseExtraInfo", "UNOM", "Location.Coords.XCoordStr", "Location.Coords.YCoordStr", "GlobalID"
         };
 
+        public static readonly string[] ColumnHeaders = new string[]
+        {
+            "ROWNUM", "FullName", "ShortName", "PostalCode", "AdmArea",
+            "District", "Address", "AddressExtraInfo", "ChiefPhone", "DeliveryDepartmentPhone",
+            "TelegraphPhone", "WorkingHours", "WorkingHoursExtraInfo", "ClassOPS",
+            "TypeOPS", "MMP", "CloseFlag", "CloseExtraInfo", "UNOM", "X_WGS84", "Y_WGS84", "GLOBALID"
+        };
 
         private Location _location;
         
@@ -107,8 +116,17 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _classOPS = value;
+                var res = Validator.ValidateInt(value, a => a > 0 && a <= 1e9);
+                if (res.Item1)
+                {
+                    _classOPS = value;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid ClassOPS value, expected integer", "Wrong format");
+                }
                 OnPropertyChanged();
+
             }
         }
 
@@ -172,7 +190,12 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _UNOM = value;
+                var res = Validator.ValidateInt(value, arg => arg >= 0 && arg <= 1e9);
+                if (res.Item1)
+                {
+                    _UNOM = value;
+                }
+
                 OnPropertyChanged();
             }
         }
@@ -185,7 +208,11 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _globalID = value;
+                var res = Validator.ValidateInt(value, arg => arg >= 0 && arg <= 1e9);
+                if (res.Item1)
+                {
+                    _globalID = value;
+                }
                 OnPropertyChanged();
             }
         }

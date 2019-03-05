@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\GEOJsonPostOfficeModel.cs" />
+    <Compile Include="Utils\Validator.cs" />
     <Compile Include="ViewModels\FindClosestViewModel.cs" />
     <Compile Include="Views\FilterSettingsWindow.xaml.cs">
       <DependentUpon>FilterSettingsWindow.xaml</DependentUpon>

@@ -29,10 +29,8 @@ namespace PostOfficesDataDisplayer.Utils
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath))
             {
-                file.WriteLine("ROWNUM;FullName;ShortName;PostalCode;AdmArea;District;" +
-                    "Address;AddressExtraInfo;ChiefPhone;DeliveryDepartmentPhone;TelegraphPhone;" +
-                    "WorkingHours;WorkingHoursExtraInfo;ClassOPS;TypeOPS;MMP;CloseFlag;CloseExtraInfo;" +
-                    "UNOM;X_WGS84;Y_WGS84;GLOBALID;");
+                string headers = String.Join(";", PostOffice.ColumnHeaders) + ";";
+                file.WriteLine(headers);
             }
         }
 
@@ -120,7 +118,7 @@ namespace PostOfficesDataDisplayer.Utils
 
         private static (bool, string) Validate(List<string> postArgs)
         {
-            if (postArgs.Count != PostOffice.PropertieNames.Length)
+            if (postArgs.Count != PostOffice.PropertiesNames.Length)
             {
                 return (false, "Number of columns differs");
             }
@@ -129,8 +127,7 @@ namespace PostOfficesDataDisplayer.Utils
             {
                 if (PostOfficeDisplayerViewModel.IntegerColumns.Contains(i))
                 {
-                    int helper;
-                    if (!int.TryParse(postArgs[i], out helper) && postArgs[i].Length != 0)
+                    if (!Validator.ValidateInt(postArgs[i], arg=>true).Item1)
                     {
                         return (false, "Values, that should be Integer cant be converted to an Integer");
                     }
@@ -138,8 +135,7 @@ namespace PostOfficesDataDisplayer.Utils
 
                 else if (PostOfficeDisplayerViewModel.DoubleColumns.Contains(i))
                 {
-                    double helper;
-                    if (!double.TryParse(postArgs[i], out helper) && postArgs[i].Length != 0)
+                    if (!Validator.ValidateDouble(postArgs[i], arg=>true).Item1)
                     {
                         return (false, "Values, that should be Double cant be converted to a Double");
                     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using PostOfficesDataDisplayer.Utils;
 
 namespace PostOfficesDataDisplayer.Models
 {
@@ -34,26 +35,17 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                double helper;
-
-                if (!double.TryParse(value, out helper) && value.Length > 0 || !(validateCoords?.Invoke(helper) ?? true) || value.Contains(","))
+                var res = Validator.ValidateDouble(value, arg => arg >= -90 && arg <= 90);
+                if (res.Item1)
                 {
-                    OnIncorrectCoordsEntered();
-                }
-                else
-                {
-                    X = helper;
+                    X = res.Item2;
                     _xcoordStr = value;
                     OnPropertyChanged();
                 }
-
-                /*if (double.TryParse(value, out helper))
+                else
                 {
-                    X = helper;
+                    OnIncorrectCoordsEntered();
                 }
-                _xcoordStr = value;
-                OnPropertyChanged();*/
-
             }
         }
 
@@ -63,25 +55,18 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                double helper;
-
-                if (!double.TryParse(value, out helper) && value.Length > 0 || !(validateCoords?.Invoke(helper) ?? true) || value.Contains(","))
+                var res = Validator.ValidateDouble(value, arg => arg >= -90 && arg <= 90);
+                if (res.Item1)
                 {
-                    OnIncorrectCoordsEntered();
-                }
-                else
-                {
-                    Y = helper;
+                    Y = res.Item2;
                     _ycoordStr = value;
                     OnPropertyChanged();
                 }
-
-                /*if (double.TryParse(value, out helper))
+                else
                 {
-                    Y = helper;
+                    OnIncorrectCoordsEntered();
                 }
-                _ycoordStr = value;
-                OnPropertyChanged();*/
+                
             }
         }
 
