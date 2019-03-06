@@ -9,11 +9,25 @@ using System.Threading.Tasks;
 
 namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
 {
+    /// <summary>
+    /// Numeric up down view model.
+    /// </summary>
     public class NumericUpDownViewModel: INotifyPropertyChanged
     {
+        /// <summary>
+        /// The minimum value.
+        /// </summary>
         private int _minValue;
+
+        /// <summary>
+        /// The max value.
+        /// </summary>
         private int _maxValue;
 
+        /// <summary>
+        /// Gets or sets the minimum value.
+        /// </summary>
+        /// <value>The minimum value.</value>
         public int MinValue
         {
             get => _minValue;
@@ -27,6 +41,10 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
 
         }
 
+        /// <summary>
+        /// Gets or sets the max value.
+        /// </summary>
+        /// <value>The max value.</value>
         public int MaxValue
         {
             get => _maxValue;
@@ -39,8 +57,15 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
             }
         }
 
+        /// <summary>
+        /// The text.
+        /// </summary>
         private string _text;
 
+        /// <summary>
+        /// Gets or sets the text.
+        /// </summary>
+        /// <value>The text.</value>
         public string Text
         {
             get
@@ -83,8 +108,15 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
             }
         }
 
+        /// <summary>
+        /// The value.
+        /// </summary>
         int _value;
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>The value.</value>
         public int Value
         {
             get
@@ -102,6 +134,9 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
             }
         }
 
+        /// <summary>
+        /// Validates the value.
+        /// </summary>
         private void ValidateValue()
         {
             _value = Math.Max(MinValue, _value);
@@ -114,8 +149,15 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
             OnPropertyChanged("Value");
         }
 
+        /// <summary>
+        /// The increase command.
+        /// </summary>
         private RelayCommand _increaseCommand;
 
+        /// <summary>
+        /// Gets the increase command.
+        /// </summary>
+        /// <value>The increase command.</value>
         public RelayCommand IncreaseCommand
         {
             get
@@ -127,8 +169,15 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
             }
         }
 
+        /// <summary>
+        /// The decrease command.
+        /// </summary>
         private RelayCommand _decreaseCommand;
 
+        /// <summary>
+        /// Gets the decrease command.
+        /// </summary>
+        /// <value>The decrease command.</value>
         public RelayCommand DecreaseCommand
         {
             get
@@ -140,6 +189,13 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:PostOfficesDataDisplayer.UserControls.UserControlsViewModel.NumericUpDownViewModel"/> class.
+        /// </summary>
+        /// <param name="minValue">Minimum value.</param>
+        /// <param name="maxValue">Max value.</param>
+        /// <param name="initialValue">Initial value.</param>
         public NumericUpDownViewModel(int minValue, int maxValue, int initialValue)
         {
             this.MinValue = minValue;
@@ -147,11 +203,18 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
             this.Value = initialValue;
         }
 
+        /// <summary>
+        /// Ons the property changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
         private void OnPropertyChanged([CallerMemberName]string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Occurs when property changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

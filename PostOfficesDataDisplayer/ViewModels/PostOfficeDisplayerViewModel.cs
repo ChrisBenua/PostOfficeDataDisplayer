@@ -14,25 +14,55 @@ using PostOfficesDataDisplayer.Views;
 
 namespace PostOfficesDataDisplayer.ViewModels
 {
+    /// <summary>
+    /// Post office displayer view model.
+    /// </summary>
     public class PostOfficeDisplayerViewModel: INotifyPropertyChanged
     {
-
+        /// <summary>
+        /// The integer columns.
+        /// </summary>
         public static readonly int[] IntegerColumns = new int[] { 0, 3, 13, 18, 21 };
 
+        /// <summary>
+        /// The double columns.
+        /// </summary>
         public static readonly int[] DoubleColumns = new int[] {19, 20};
 
+        /// <summary>
+        /// The max length for double columns.
+        /// </summary>
         public static readonly int MaxLenForDoubleColumns = 50;
 
+        /// <summary>
+        /// The max length for int columns.
+        /// </summary>
         public static readonly int MaxLenForIntColumns = 10;
 
+        /// <summary>
+        /// The max length for string columns.
+        /// </summary>
         public static readonly int MaxLenForStringColumns = 1000;
 
+        /// <summary>
+        /// The index of the filter predicate.
+        /// </summary>
         private int _filterPredicateIndex = 0;
 
+        /// <summary>
+        /// The index of the sort predicate.
+        /// </summary>
         private int _sortPredicateIndex = 0;
 
+        /// <summary>
+        /// The filter string.
+        /// </summary>
         private string _filterStr;
 
+        /// <summary>
+        /// Gets or sets the filter string.
+        /// </summary>
+        /// <value>The filter string.</value>
         public string FilterStr
         {
             get => _filterStr;
@@ -43,8 +73,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The sort comparisons.
+        /// </summary>
         private Func<PostOffice, IComparable>[] _sortComparisons;
-        
+
+        /// <summary>
+        /// Gets the sort comparisons.
+        /// </summary>
+        /// <value>The sort comparisons.</value>
         public Func<PostOffice, IComparable>[] SortComparisons
         {
             get
@@ -60,7 +97,11 @@ namespace PostOfficesDataDisplayer.ViewModels
         }
         
         
-
+        /// <summary>
+        /// Gets the filter predicates.
+        /// </summary>
+        /// <returns>The filter predicates.</returns>
+        /// <param name="filter">Filter.</param>
         private Func<PostOffice, bool>[] GetFilterPredicates(string filter)
         {
             return new Func<PostOffice, bool>[]
@@ -72,9 +113,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             };
         }
         
-
+        /// <summary>
+        /// The number of items to be shown.
+        /// </summary>
         private int _prefixCount;
 
+        /// <summary>
+        /// Gets or sets the prefix count.
+        /// </summary>
+        /// <value>The prefix count.</value>
         public int PrefixCount
         {
             get => _prefixCount;
@@ -90,8 +137,10 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
-        //private ObservableCollection<PostOffice> _postOfficesPrefix;
-
+        /// <summary>
+        /// Gets the post offices prefix.
+        /// </summary>
+        /// <value>The post offices prefix.</value>
         public ObservableCollection<PostOffice> PostOfficesPrefix
         {
             get
@@ -107,8 +156,15 @@ namespace PostOfficesDataDisplayer.ViewModels
 
         }
 
+        /// <summary>
+        /// The on invalid coords delegate.
+        /// </summary>
         private Action _onInvalidCoordsDelegate;
 
+        /// <summary>
+        /// Gets the on invalid coords delegate.
+        /// </summary>
+        /// <value>The on invalid coords delegate.</value>
         public Action OnInvalidCoordsDelegate
         {
             get
@@ -120,8 +176,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The post offices.
+        /// </summary>
         private ObservableCollection<PostOffice> _postOffices;
 
+        /// <summary>
+        /// Gets or sets the post offices.
+        /// </summary>
+        /// <value>The post offices.</value>
         public ObservableCollection<PostOffice> PostOffices
         {
             get => _postOffices;
@@ -155,8 +218,16 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The selected office.
+        /// </summary>
         private PostOffice _selectedOffice;
 
+
+        /// <summary>
+        /// Gets or sets the selected office.
+        /// </summary>
+        /// <value>The selected office.</value>
         public PostOffice SelectedOffice
         {
             get => _selectedOffice;
@@ -168,8 +239,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The delete command.
+        /// </summary>
         private RelayCommand _deleteCommand;
 
+        /// <summary>
+        /// Gets the delete command.
+        /// </summary>
+        /// <value>The delete command.</value>
         public RelayCommand DeleteCommand
         {
             get
@@ -189,8 +267,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The add command.
+        /// </summary>
         private RelayCommand _addCommand;
 
+        /// <summary>
+        /// Gets the add command.
+        /// </summary>
+        /// <value>The add command.</value>
         public RelayCommand AddCommand
         {
             get
@@ -203,8 +288,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The open file command.
+        /// </summary>
         private RelayCommand _openFileCommand;
 
+        /// <summary>
+        /// Gets the open file command.
+        /// </summary>
+        /// <value>The open file command.</value>
         public RelayCommand OpenFileCommand
         {
             get
@@ -250,8 +342,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The sort by command.
+        /// </summary>
         private RelayCommand _sortByCommand;
 
+        /// <summary>
+        /// Gets the sort by command.
+        /// </summary>
+        /// <value>The sort by command.</value>
         public RelayCommand SortByCommand
         {
             get
@@ -267,8 +366,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The filter by command.
+        /// </summary>
         private RelayCommand _filterByCommand;
 
+        /// <summary>
+        /// Gets the filter by command.
+        /// </summary>
+        /// <value>The filter by command.</value>
         public RelayCommand FilterByCommand
         {
             get
@@ -284,8 +390,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The open filter setting command.
+        /// </summary>
         private RelayCommand _openFilterSettingCommand;
 
+        /// <summary>
+        /// Gets the open filter settings command.
+        /// </summary>
+        /// <value>The open filter settings command.</value>
         public RelayCommand OpenFilterSettingsCommand
         {
             get
@@ -300,8 +413,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The save to file command.
+        /// </summary>
         private RelayCommand _saveToFileCommand;
 
+        /// <summary>
+        /// Gets the save to file command.
+        /// </summary>
+        /// <value>The save to file command.</value>
         public RelayCommand SaveToFileCommand
         {
             get
@@ -320,8 +440,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The rewrite file command.
+        /// </summary>
         private RelayCommand _rewriteFileCommand;
 
+        /// <summary>
+        /// Gets the rewrite file command.
+        /// </summary>
+        /// <value>The rewrite file command.</value>
         public RelayCommand RewriteFileCommand
         {
             get
@@ -358,8 +485,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The find closest command.
+        /// </summary>
         private RelayCommand _findClosestCommand;
 
+        /// <summary>
+        /// Gets the find closest command.
+        /// </summary>
+        /// <value>The find closest command.</value>
         public RelayCommand FindClosestCommand
         {
             get
@@ -372,8 +506,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The open on map command.
+        /// </summary>
         private RelayCommand _openOnMapCommand;
 
+        /// <summary>
+        /// Gets the open on map command.
+        /// </summary>
+        /// <value>The open on map command.</value>
         public RelayCommand OpenOnMapCommand
         {
             get
@@ -386,8 +527,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The save as geo json command.
+        /// </summary>
         private RelayCommand _saveAsGeoJsonCommand;
 
+        /// <summary>
+        /// Gets the save as geo json command.
+        /// </summary>
+        /// <value>The save as geo json command.</value>
         public RelayCommand SaveAsGeoJsonCommand
         {
             get
@@ -420,8 +568,16 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The center.
+        /// </summary>
         private Models.Point _center;
 
+        /// <summary>
+        /// Gets the dist.
+        /// </summary>
+        /// <returns>The dist.</returns>
+        /// <param name="p1">P1.</param>
         private double GetDist(PostOffice p1)
         {
             //Haversine formula [https://en.wikipedia.org/wiki/Haversine_formula]
@@ -436,12 +592,21 @@ namespace PostOfficesDataDisplayer.ViewModels
             return ans;
         }
 
+        /// <summary>
+        /// Degreeses to radians.
+        /// </summary>
+        /// <returns>The to radians.</returns>
+        /// <param name="deg">Deg.</param>
         private double DegreesToRadians(double deg)
         {
             return deg * Math.PI / 180;
 
         }
 
+        /// <summary>
+        /// Sets the center point.
+        /// </summary>
+        /// <param name="center">Center.</param>
         public void SetCenterPoint(Models.Point center)
         {
             _center = center;
@@ -450,8 +615,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             OnPropertyChanged("PostOfficesPrefix");
         }
 
+        /// <summary>
+        /// The sort by text.
+        /// </summary>
         private string _sortByText = "Sort By \nNone";
 
+        /// <summary>
+        /// Gets or sets the sort by text.
+        /// </summary>
+        /// <value>The sort by text.</value>
         public string SortByText
         {
             get => _sortByText;
@@ -463,6 +635,9 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The filter by text.
+        /// </summary>
         private string _filterByText = "Filter By\nNone";
 
         public string FilterByText
@@ -476,16 +651,27 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:PostOfficesDataDisplayer.ViewModels.PostOfficeDisplayerViewModel"/> class.
+        /// </summary>
         public PostOfficeDisplayerViewModel()
         {
             PostOffices = new ObservableCollection<PostOffice>();
         }
-        
+
+        /// <summary>
+        /// Ons the property changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Occurs when property changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }

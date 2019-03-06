@@ -10,9 +10,16 @@ using PostOfficesDataDisplayer.ViewModels;
 
 namespace PostOfficesDataDisplayer.Utils
 {
+    /// <summary>
+    /// Input Output Helper.
+    /// </summary>
     public static class IOHelper
     {
-
+        /// <summary>
+        /// Writes the geo json.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
+        /// <param name="postOffices">Post offices.</param>
         public static void WriteGeoJson(string filePath, IList<PostOffice> postOffices)
         {
 
@@ -25,6 +32,10 @@ namespace PostOfficesDataDisplayer.Utils
             
         }
 
+        /// <summary>
+        /// Writes the headers.
+        /// </summary>
+        /// <param name="filePath">File path.</param>
         public static void WriteHeaders(string filePath)
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath))
@@ -34,11 +45,21 @@ namespace PostOfficesDataDisplayer.Utils
             }
         }
 
+        /// <summary>
+        /// Wrap the specified string.
+        /// </summary>
+        /// <returns>The wrapped string.</returns>
+        /// <param name="s">String to be nested in ""</param>
         private static string Wrap(string s)
         {
             return "\"" + s + "\"";
         }
 
+        /// <summary>
+        /// Serializes the post office.
+        /// </summary>
+        /// <returns>The post office.</returns>
+        /// <param name="p">P.</param>
         private static string SerializePostOffice(PostOffice p)
         {
             string res = "";
@@ -50,6 +71,12 @@ namespace PostOfficesDataDisplayer.Utils
             return res;
         }
 
+        /// <summary>
+        /// Writes the data.
+        /// </summary>
+        /// <param name="postOffices">Post offices.</param>
+        /// <param name="filePath">File path.</param>
+        /// <param name="append">If set to <c>true</c> append.</param>
         public static void WriteData(ObservableCollection<PostOffice> postOffices, string filePath, bool append)
         {
             
@@ -66,6 +93,11 @@ namespace PostOfficesDataDisplayer.Utils
             } 
         }
 
+        /// <summary>
+        /// Reads the data.
+        /// </summary>
+        /// <returns>The data.</returns>
+        /// <param name="filePath">File path.</param>
         public static (bool, List<PostOffice>) ReadData(string filePath)
         {
             List<PostOffice> postOffices = new List<PostOffice>();
@@ -116,6 +148,11 @@ namespace PostOfficesDataDisplayer.Utils
             return (true, postOffices);
         }
 
+        /// <summary>
+        /// Validate the specified postArgs.
+        /// </summary>
+        /// <returns>The validate.</returns>
+        /// <param name="postArgs">Post arguments.</param>
         private static (bool, string) Validate(List<string> postArgs)
         {
             if (postArgs.Count != PostOffice.PropertiesNames.Length)

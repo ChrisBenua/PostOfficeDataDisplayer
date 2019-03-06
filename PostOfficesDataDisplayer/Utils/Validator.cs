@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace PostOfficesDataDisplayer.Utils
 {
+    /// <summary>
+    /// Validator.
+    /// </summary>
     public static class Validator
     {
-
+        /// <summary>
+        /// Validates the int.
+        /// </summary>
+        /// <returns>The tuple of correctness of string and converted int</returns>
+        /// <param name="s">String to be validated</param>
+        /// <param name="valid">Validation predicate</param>
         public static (bool, int) ValidateInt(string s, Func<int, bool> valid)
         {
             int helper;
@@ -20,6 +28,12 @@ namespace PostOfficesDataDisplayer.Utils
             return (false, helper);
         }
 
+        /// <summary>
+        /// Validates the double.
+        /// </summary>
+        /// <returns>The tuple of correctness of string and converted double</returns>
+        /// <param name="s">String to be validated</param>
+        /// <param name="valid">Validation predicate</param>
         public static (bool, double) ValidateDouble(string s, Func<double, bool> valid)
         {
             double helper;

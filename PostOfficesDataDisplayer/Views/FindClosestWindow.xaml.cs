@@ -20,8 +20,15 @@ namespace PostOfficesDataDisplayer.Views
     /// </summary>
     public partial class FindClosestWindow : Window
     {
+        /// <summary>
+        /// The view model.
+        /// </summary>
         private FindClosestViewModel viewModel;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:PostOfficesDataDisplayer.Views.FindClosestWindow"/> class.
+        /// </summary>
+        /// <param name="postOfficeViewModel">Post office view model.</param>
         public FindClosestWindow(PostOfficeDisplayerViewModel postOfficeViewModel)
         {
             viewModel = new FindClosestViewModel();

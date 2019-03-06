@@ -21,6 +21,11 @@ namespace PostOfficesDataDisplayer
     public partial class FilterSettingsWindow : Window
     {
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:PostOfficesDataDisplayer.FilterSettingsWindow"/> class.
+        /// </summary>
+        /// <param name="filterIndex">Filter index.</param>
+        /// <param name="viewModel">View model.</param>
         public FilterSettingsWindow(int filterIndex, PostOfficeDisplayerViewModel viewModel)
         {
             InitializeComponent();

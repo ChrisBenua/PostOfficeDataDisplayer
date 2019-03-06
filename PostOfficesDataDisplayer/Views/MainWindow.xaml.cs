@@ -24,8 +24,14 @@ namespace PostOfficesDataDisplayer
     public partial class MainWindow : Window
     {
 
-
+        /// <summary>
+        /// The view model.
+        /// </summary>
         private PostOfficeDisplayerViewModel viewModel;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:PostOfficesDataDisplayer.MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             viewModel = new PostOfficeDisplayerViewModel();
@@ -172,7 +178,12 @@ namespace PostOfficesDataDisplayer
             
             //(new TextBox()).LostFocus += MainWindow_LostFocus;
         }
-        
+
+        /// <summary>
+        /// Strings the text box preview input.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">E.</param>
         private void StringTextBoxPreviewInput(object sender, TextCompositionEventArgs e)
         {
             if ((e.Text.Length + (sender as TextBox).Text.Length) > PostOfficeDisplayerViewModel.MaxLenForStringColumns)
@@ -181,6 +192,11 @@ namespace PostOfficesDataDisplayer
             }
         }
 
+        /// <summary>
+        /// Gets the text column template.
+        /// </summary>
+        /// <returns>The text column template.</returns>
+        /// <param name="index">Index.</param>
         public DataTemplate getTextColumnTemplate(int index)
         {
             DataTemplate template = new DataTemplate();

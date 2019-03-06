@@ -12,75 +12,53 @@ using PostOfficesDataDisplayer.Models;
 
 namespace PostOfficesDataDisplayer.ViewModels
 {
+    /// <summary>
+    /// Find closest window view model.
+    /// </summary>
     public class FindClosestViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// The x.
+        /// </summary>
         private double _x;
 
+        /// <summary>
+        /// The y.
+        /// </summary>
         private double _y;
 
+        /// <summary>
+        /// The is XCoord ok.
+        /// </summary>
         private bool _isXCoordOk;
 
+        /// <summary>
+        /// The is YCoord ok.
+        /// </summary>
         private bool _isYCoordOk;
 
+        /// <summary>
+        /// The  x coordinate string.
+        /// </summary>
         private string _xCoordStr;
 
+        /// <summary>
+        /// Updates the apply button.
+        /// </summary>
         private void UpdateApplyButton()
         {
             IsApplyButtonEnabled = _isYCoordOk && _isXCoordOk;
         }
 
-        /*public string XCoordStr
-        {
-            get => _xCoordStr;
-
-            set
-            {
-                double helper;
-                if (!double.TryParse(value, out helper) && value.Length > 0 || value.Contains(",") || helper < -90 || helper > 90)
-                {
-                    MessageBox.Show("Invalid value for X coordinate");
-                    //_isXCoordOk = false;
-                }
-                else
-                {
-                    _x = helper;
-                    _isXCoordOk = value.Length > 0;
-                    _xCoordStr = value;
-                    OnPropertyChanged();
-                }
-                UpdateApplyButton();
-            }
-        }
-
-        private string _yCoordStr;
-
-        public string YCoordStr
-        {
-            get => _yCoordStr;
-
-            set
-            {
-                double helper;
-                if (!double.TryParse(value, out helper) && value.Length > 0 || value.Contains(",") || helper < -90 || helper > 90)
-                {
-                    MessageBox.Show("Invalid value for Y coordinate");
-                    //_isYCoordOk = false;
-                }
-                else
-                {
-                    _y = helper;
-                    _yCoordStr = value;
-                    _isYCoordOk = value.Length > 0 ;
-                    OnPropertyChanged();
-                }
-                UpdateApplyButton();
-            }
-        }*/
-
-
-
+        /// <summary>
+        /// The coords.
+        /// </summary>
         private Models.Point _coords;
 
+        /// <summary>
+        /// Gets or sets the coords.
+        /// </summary>
+        /// <value>The coords.</value>
         public Models.Point Coords
         {
             get => _coords;
@@ -99,8 +77,16 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The is apply button enabled.
+        /// </summary>
         private bool _isApplyButtonEnabled;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this
+        /// <see cref="T:PostOfficesDataDisplayer.ViewModels.FindClosestViewModel"/> is apply button enabled.
+        /// </summary>
+        /// <value><c>true</c> if is apply button enabled; otherwise, <c>false</c>.</value>
         public bool IsApplyButtonEnabled
         {
             get => _isApplyButtonEnabled;
@@ -122,8 +108,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The color of the apply button.
+        /// </summary>
         private Brush _applyButtonColor = Brushes.LightGray;
 
+        /// <summary>
+        /// Gets or sets the color of the apply button.
+        /// </summary>
+        /// <value>The color of the apply button.</value>
         public Brush ApplyButtonColor
         {
             get => _applyButtonColor;
@@ -135,8 +128,15 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// The apply button command.
+        /// </summary>
         private RelayCommand _applyButtonCommand;
 
+        /// <summary>
+        /// Gets the apply button command.
+        /// </summary>
+        /// <value>The apply button command.</value>
         public RelayCommand ApplyButtonCommand
         {
             get
@@ -149,25 +149,44 @@ namespace PostOfficesDataDisplayer.ViewModels
             }
         }
 
+        /// <summary>
+        /// Ons the property changed.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        /// <summary>
+        /// Occurs when property changed.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Ons the chosen coordinates.
+        /// </summary>
         public void OnChosenCoordinates()
         {
             ChosenCoordinates?.Invoke(Coords.X, Coords.Y);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:PostOfficesDataDisplayer.ViewModels.FindClosestViewModel"/> class.
+        /// </summary>
         public FindClosestViewModel()
         {
             this.Coords = new Models.Point("", "");
         }
 
+        /// <summary>
+        /// Occurs when chosen coordinates.
+        /// </summary>
         public event Action<double, double> ChosenCoordinates;
 
+        /// <summary>
+        /// Occurs when notify to close.
+        /// </summary>
         public event Action NotifyToClose;
     }
 }

@@ -21,17 +21,35 @@ namespace PostOfficesDataDisplayer.UserControls
     /// </summary>
     public partial class NumericUpDownElement : UserControl
     {
-
+        /// <summary>
+        /// The minimum value property.
+        /// </summary>
         public readonly static DependencyProperty MinimumValueProperty = DependencyProperty.Register("Minimum", typeof(int), 
             typeof(NumericUpDownElement), new UIPropertyMetadata(0, ValueChanged));
+
+        /// <summary>
+        /// The maximum value property.
+        /// </summary>
         public readonly static DependencyProperty MaximumValueProperty = DependencyProperty.Register("Maximum", typeof(int), 
             typeof(NumericUpDownElement), new UIPropertyMetadata(100, ValueChanged));
+
+        /// <summary>
+        /// The initial value property.
+        /// </summary>
         public readonly static DependencyProperty InitialValueProperty = DependencyProperty.Register("InitialValue", typeof(int),
             typeof(NumericUpDownElement), new UIPropertyMetadata(0, ValueChanged));
         
-
+        /// <summary>
+        /// Gets the view model.
+        /// </summary>
+        /// <value>The view model.</value>
         public NumericUpDownViewModel ViewModel { get; private set; }
 
+        /// <summary>
+        /// Values the changed.
+        /// </summary>
+        /// <param name="d">D.</param>
+        /// <param name="e">E.</param>
         private static void ValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as NumericUpDownElement;
@@ -40,6 +58,10 @@ namespace PostOfficesDataDisplayer.UserControls
             control.ViewModel.MinValue = (int)control.GetValue(MinimumValueProperty);                
         }
 
+        /// <summary>
+        /// Gets or sets the maximum.
+        /// </summary>
+        /// <value>The maximum.</value>
         public int Maximum
         {
             get
@@ -52,8 +74,10 @@ namespace PostOfficesDataDisplayer.UserControls
             }
         }
 
-        //public int Maximum => ;
-
+        /// <summary>
+        /// Gets or sets the minimum.
+        /// </summary>
+        /// <value>The minimum.</value>
         public int Minimum
         {
             get
@@ -67,6 +91,10 @@ namespace PostOfficesDataDisplayer.UserControls
             }
         }
 
+        /// <summary>
+        /// Gets or sets the initial value.
+        /// </summary>
+        /// <value>The initial value.</value>
         public int InitialValue
         {
             get
@@ -80,6 +108,9 @@ namespace PostOfficesDataDisplayer.UserControls
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:PostOfficesDataDisplayer.UserControls.NumericUpDownElement"/> class.
+        /// </summary>
         public NumericUpDownElement()
         {
             InitializeComponent();
