@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
+using System.Windows;
 
 namespace PostOfficesDataDisplayer.Models
 {
@@ -25,7 +26,19 @@ namespace PostOfficesDataDisplayer.Models
         public static void OpenURL(string endPoint)
         {
             //set default browser to chrome, seems like Edge cant open such long URLs
-            System.Diagnostics.Process.Start(URLBase + endPoint);
+            if (endPoint.Length == 0)
+            {
+                return;
+            }
+
+            try
+            {
+                System.Diagnostics.Process.Start(URLBase + endPoint);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                MessageBox.Show("Save as geojson and open in geojson.io", "Too long URL");
+            }
         }
     }
 
@@ -75,8 +88,16 @@ namespace PostOfficesDataDisplayer.Models
         /// <returns>The JSONS tring.</returns>
         public string EscapedJSONString()
         {
-            return Uri.EscapeDataString(JSONString());
+            try
+            {
+                return Uri.EscapeDataString(JSONString());
+            }
+            catch (UriFormatException ex)
+            {
+                MessageBox.Show("Please, save file as GEOJSON to work further", "Too much things to display");
+            }
 
+            return "";
         }
     }
 

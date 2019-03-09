@@ -28,10 +28,10 @@
 
         <Menu Grid.ColumnSpan="10">
             <MenuItem Header="Save..." FontSize="18">
-                <MenuItem x:Name="mSaveToNewFile" Header="В новый файл"></MenuItem>
-                <MenuItem x:Name="mAppendToFile" Header="Добавить в существующий файл"></MenuItem>
-                <MenuItem x:Name="mReplaceFile" Header="Заменить содержимое файла"></MenuItem>
-                <MenuItem x:Name="mSaveGEOJsonData" Header="Сохранить как GEOJson"></MenuItem>
+                <MenuItem x:Name="mSaveToNewFile" Header="Save to new file"></MenuItem>
+                <MenuItem x:Name="mAppendToFile" Header="Append to file"></MenuItem>
+                <MenuItem x:Name="mReplaceFile" Header="Replace contents of file"></MenuItem>
+                <MenuItem x:Name="mSaveGEOJsonData" Header="Save as GEOJson"></MenuItem>
 
             </MenuItem>
             <MenuItem x:Name="mOpenFile" Header="Open" FontSize="18"></MenuItem>
@@ -39,7 +39,7 @@
                 <MenuItem x:Name="mSortByNone" Header="None"></MenuItem>
                 <MenuItem x:Name="mSortByClassOPS" Header="ClassOPS"></MenuItem>
                 <MenuItem x:Name="mSortByShortName" Header="ShortName"></MenuItem>
-                <MenuItem x:Name="mSortByDistToPoint" Header="Расстояние до точки"></MenuItem>
+                <MenuItem x:Name="mSortByDistToPoint" Header="Dist To Coords"></MenuItem>
             </MenuItem>
             <MenuItem Header="Filter By" FontSize="18">
                 <MenuItem x:Name="mFilterByNone" Header="None"></MenuItem>
@@ -64,7 +64,7 @@
 
         <TextBox Grid.Row="1" Grid.Column="1" AcceptsReturn="true" MaxLines="2" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled"
                  VerticalScrollBarVisibility="Disabled" x:Name="mHintTextBox" BorderBrush="Transparent"
-                  >Всего записей в таблице</TextBox>
+                  >Total entities in table</TextBox>
 
         <TextBlock x:Name="mDataSetSizeTextBox" Grid.Column="2" Grid.Row="1" TextAlignment="Center" Text="0" Padding="0, 10, 0, 0"></TextBlock>
 

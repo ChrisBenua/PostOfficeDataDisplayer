@@ -59,7 +59,7 @@ namespace PostOfficesDataDisplayer
 
             mSortByDistToPoint.Command = viewModel.FindClosestCommand;
 
-            mHintTextBox.Text = "Всего записей" + Environment.NewLine + "в таблице";
+            mHintTextBox.Text = "Total entities" + Environment.NewLine + "in table";
             
             viewModel.PrefixCount = mUpDownControl.InitialValue;
             mAddButton.Command = viewModel.AddCommand;

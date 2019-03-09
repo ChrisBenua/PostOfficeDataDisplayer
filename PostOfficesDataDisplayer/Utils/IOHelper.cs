@@ -178,10 +178,23 @@ namespace PostOfficesDataDisplayer.Utils
                     }
                 }
 
+                else if (PostOfficeDisplayerViewModel.PhonesColumns.Contains(i))
+                {
+                    string message;
+                    bool flag;
+                    (flag, message) = Validator.ValidatePhoneNumber(postArgs[i]);
+                    if (!flag)
+                    {
+                        return (false, message);
+                    }
+                }
+
                 else if (PostOfficeDisplayerViewModel.MaxLenForStringColumns < postArgs[i].Length)
                 {
                     return (false, "Too big string length");
                 }
+                
+                
             }
 
             return (true, "ok");

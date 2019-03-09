@@ -30,6 +30,11 @@ namespace PostOfficesDataDisplayer.ViewModels
         public static readonly int[] DoubleColumns = new int[] {19, 20};
 
         /// <summary>
+        /// The phones columns.
+        /// </summary>
+        public static readonly int[] PhonesColumns = new int[] {8, 9, 10};
+
+        /// <summary>
         /// The max length for double columns.
         /// </summary>
         public static readonly int MaxLenForDoubleColumns = 50;

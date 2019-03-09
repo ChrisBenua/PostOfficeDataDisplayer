@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using PostOfficesDataDisplayer.Utils;
 
 namespace PostOfficesDataDisplayer.Models
 {
@@ -88,7 +90,10 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _chiefPhone = value;
+                if (CheckPhoneFormat(value))
+                {
+                    _chiefPhone = value;
+                }
                 OnPropertyChanged();
             }
         }
@@ -108,7 +113,10 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _deliveryDepartmentPhone = value;
+                if (CheckPhoneFormat(value))
+                {
+                    _deliveryDepartmentPhone = value;
+                }
                 OnPropertyChanged();
             }
         }
@@ -128,7 +136,10 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _telegraphPhone = value;
+                if (CheckPhoneFormat(value))
+                {
+                    _telegraphPhone = value;
+                }
                 OnPropertyChanged();
             }
         }
@@ -178,5 +189,19 @@ namespace PostOfficesDataDisplayer.Models
         /// Occurs when property changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private bool CheckPhoneFormat(string value)
+        {
+            bool ok;
+            string error;
+            (ok, error) = Validator.ValidatePhoneNumber(value, true);
+
+            if (!ok)
+            {
+                MessageBox.Show(error, "Wrong Phone Format");
+            }
+
+            return ok;
+        }
     }
 }

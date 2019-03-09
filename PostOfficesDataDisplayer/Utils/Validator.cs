@@ -49,5 +49,67 @@ namespace PostOfficesDataDisplayer.Utils
             return (false, helper);
         }
 
+        /// <summary>
+        /// Validates Phone Number.
+        /// </summary>
+        /// <param name="phone">phone string</param>
+        /// <returns>The tuple of correctness and error string.</returns>
+        public static (bool, string) ValidatePhoneNumber(string phone, bool stillEditing = false)
+        {
+            foreach (var s in phone.Split(new string[] {"; " }, StringSplitOptions.RemoveEmptyEntries))
+            {
+
+                int rightBraces = s.Count(el => el == ')');
+                int lastRightBrace = s.LastIndexOf(')');
+                int leftBraces = s.Count(el => el == '(');
+                int leftBrace = s.IndexOf('(');
+                List<int> dashesPosition = new List<int>();
+                for (int i = 0; i < s.Length; ++i)
+                {
+                    if (s[i] == '-')
+                    {
+                        dashesPosition.Add(i);
+                    }
+                }
+
+                if (s.Contains("доб."))
+                {
+                    continue;
+                }
+
+                if (stillEditing && s.Count(el => !(Char.IsWhiteSpace(el) || el == '-')) < 12)
+                {
+                    continue;
+                }
+
+                if (rightBraces > 1 || leftBraces > 1 || rightBraces == 0 || leftBraces == 0)
+                {
+                    return (false, "Invalid numbers of braces in phoneNumber");
+                }
+
+                if (s.Count(el => Char.IsDigit(el)) != 10)
+                {
+                    return (false, "Invalid amount of digits in phone");
+                }
+
+                if (dashesPosition.Count != 2)
+                {
+                    return (false, "Invalid number of dashes");
+                }
+
+                if (dashesPosition[1] - dashesPosition[0] - 1 != 2)
+                {
+                    return (false, "Invalid amount of digits in phone number");
+                }
+
+                if (!(lastRightBrace - leftBrace >= 3 && lastRightBrace - leftBrace <= 5))
+                {
+                    return (false, "Invalid code in braces");
+                }
+            }
+
+            return (true, null);
+        }
+
     }
 }
