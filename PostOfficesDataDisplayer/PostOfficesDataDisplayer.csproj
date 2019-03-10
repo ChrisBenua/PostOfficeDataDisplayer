@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\GEOJsonPostOfficeModel.cs" />
+    <Compile Include="Utils\URLManager.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="ViewModels\FindClosestViewModel.cs" />
     <Compile Include="Views\FilterSettingsWindow.xaml.cs">
@@ -127,6 +128,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

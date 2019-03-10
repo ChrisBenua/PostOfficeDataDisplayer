@@ -106,11 +106,20 @@ namespace PostOfficesDataDisplayer
                 NotifyOnSourceUpdated = true
             });
 
+
+            mfilterTextBox.SetBinding(TextBox.ToolTipProperty, new Binding()
+            {
+                Source = viewModel,
+                Path = new PropertyPath("FilterStr"),
+                NotifyOnSourceUpdated = true
+                
+            });
+
             for (int i = 0; i < PostOffice.PropertiesNames.Length; ++i)
             {
                 DataGridTemplateColumn column = new DataGridTemplateColumn()
                 {
-                    CellTemplate = getTextColumnTemplate(i)
+                    CellTemplate = GetTextColumnTemplate(i)
                 };
 
                 column.Width = 80;
@@ -197,7 +206,7 @@ namespace PostOfficesDataDisplayer
         /// </summary>
         /// <returns>The text column template.</returns>
         /// <param name="index">Index.</param>
-        public DataTemplate getTextColumnTemplate(int index)
+        public DataTemplate GetTextColumnTemplate(int index)
         {
             DataTemplate template = new DataTemplate();
             FrameworkElementFactory factory = new FrameworkElementFactory(typeof(TextBox));

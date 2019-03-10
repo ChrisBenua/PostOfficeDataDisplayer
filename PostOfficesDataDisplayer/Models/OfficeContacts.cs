@@ -30,7 +30,15 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _postalCode = value;
+                if (Validator.ValidateInt(value, arg => arg > 0).Item1)
+                {
+                    _postalCode = value;
+
+                }
+                else
+                {
+                    MessageBox.Show("Invalid PostalCode, expected integer-like value", "Wrong Format");
+                }
                 OnPropertyChanged();
             }
         }
@@ -190,6 +198,11 @@ namespace PostOfficesDataDisplayer.Models
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Checks Phone format(anti copypasting method)
+        /// </summary>
+        /// <param name="value">phone</param>
+        /// <returns> Correctens of phone</returns>
         private bool CheckPhoneFormat(string value)
         {
             bool ok;

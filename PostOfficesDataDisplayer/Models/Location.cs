@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using PostOfficesDataDisplayer.Utils;
+using PostOfficesDataDisplayer.ViewModels;
 
 namespace PostOfficesDataDisplayer.Models
 {
@@ -177,15 +178,36 @@ namespace PostOfficesDataDisplayer.Models
             this.validateCoords = new Predicate<double>(validate);
         }
 
+
+        /// <summary>
+        /// Degreeses to radians.
+        /// </summary>
+        /// <returns>The to radians.</returns>
+        /// <param name="deg">Deg.</param>
+        public static double DegreesToRadians(double deg)
+        {
+            return deg * Math.PI / 180;
+
+        }
+
         /// <summary>
         /// Dists between Points.
         /// </summary>
         /// <returns>The distance</returns>
-        /// <param name="other">Other.</param>
-        public double DistTo(Point other)
+        /// <param name="_center">To point</param>
+        public double DistTo(Point _center)
         {
-            return Math.Sqrt((this.X - other.X) * (this.X - other.X) +
-                (this.Y - other.Y) * (this.Y - other.Y));
+            //Haversine formula [https://en.wikipedia.org/wiki/Haversine_formula]
+            double EarthRadius = 6371;
+            double deltaLat = DegreesToRadians(this.X - _center.X);
+            double deltaLon = DegreesToRadians(this.Y - _center.Y);
+            double hav = Math.Sin(deltaLat / 2) * Math.Sin(deltaLat / 2) +
+                         Math.Cos(DegreesToRadians(this.X)) * 
+                         Math.Cos(DegreesToRadians(_center.X)) *
+                         Math.Sin(deltaLon / 2) * Math.Sin(deltaLon / 2);
+
+            double ans = EarthRadius * 2 * Math.Atan2(Math.Sqrt(hav), Math.Sqrt(1 - hav));
+            return ans; ;
         }
 
         /// <summary>

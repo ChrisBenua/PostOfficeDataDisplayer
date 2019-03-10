@@ -18,16 +18,6 @@ namespace PostOfficesDataDisplayer.ViewModels
     public class FindClosestViewModel : INotifyPropertyChanged
     {
         /// <summary>
-        /// The x.
-        /// </summary>
-        private double _x;
-
-        /// <summary>
-        /// The y.
-        /// </summary>
-        private double _y;
-
-        /// <summary>
         /// The is XCoord ok.
         /// </summary>
         private bool _isXCoordOk;
@@ -36,11 +26,6 @@ namespace PostOfficesDataDisplayer.ViewModels
         /// The is YCoord ok.
         /// </summary>
         private bool _isYCoordOk;
-
-        /// <summary>
-        /// The  x coordinate string.
-        /// </summary>
-        private string _xCoordStr;
 
         /// <summary>
         /// Updates the apply button.

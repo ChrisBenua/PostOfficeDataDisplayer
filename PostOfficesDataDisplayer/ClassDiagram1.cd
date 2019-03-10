@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PostOfficesDataDisplayer.App">
+    <Position X="17.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.FilterSettingsWindow" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\FilterSettingsWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAEAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.GEOJsonPostOfficeCollection">
+    <Position X="3.5" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAQAJAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GEOJsonPostOfficeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.GEOJsonFeature">
+    <Position X="3.5" Y="10.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAKAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GEOJsonPostOfficeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.GEOJsonPoint">
+    <Position X="2" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GEOJsonPostOfficeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.GEOJsonProperties">
+    <Position X="5.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAQAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\GEOJsonPostOfficeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.Point" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAIAAAIAAQAABAAIAAAYAAAgAAAAAAAAQAABQAAYgA=</HashCode>
+      <FileName>Models\Location.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.Location" BaseTypeListCollapsed="true">
+    <Position X="2" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAQAAQAAAAAAgIAAAAAAAgABAAAAAQAAAAABAAAA=</HashCode>
+      <FileName>Models\Location.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.OfficeContacts" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAMCAAAAAAAAAAAJAAAQAAAgAAAAQASQAAAAEABCAA=</HashCode>
+      <FileName>Models\OfficeContacts.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.PostOffice" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAAAAgABAQAgKAAoAIRACICgEAHoJAgBCABBEAAAAA=</HashCode>
+      <FileName>Models\PostOffice.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Models.WorkingSchedule" BaseTypeListCollapsed="true">
+    <Position X="2" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAAAAAAAAIAAAAAAAgAAAAAAEAAAAAAAAAAE=</HashCode>
+      <FileName>Models\WorkingSchedule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Properties.Resources">
+    <Position X="14.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Properties.Settings">
+    <Position X="16" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.UserControls.NumericUpDownElement" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAEAAACAAQAAAAAACACAAAAAEEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserControls\NumericUpDownElement.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.UserControls.UserControlsViewModel.NumericUpDownViewModel" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAgAIAEAoAAAgAAAgAAIAAAgCCAAgAA=</HashCode>
+      <FileName>UserControls\UserControlsViewModel\NumericUpDownViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Utils.IOHelper">
+    <Position X="16" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAACBAAAAAAAAAAAAAAAgDAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Utils\IOHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Utils.RelayCommand" BaseTypeListCollapsed="true">
+    <Position X="19" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Utils.Validator">
+    <Position X="17.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAIAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\Validator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.ViewModels.FindClosestViewModel" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IIAABAAIQBwgAEAAIAAAAAEAgAAAgAAARAAAAQAEAQA=</HashCode>
+      <FileName>ViewModels\FindClosestViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.ViewModels.PostOfficeDisplayerViewModel" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QlUQIEkACiBICCECIQEAAFAAwSgQAwICAIIRASEEUQQ=</HashCode>
+      <FileName>ViewModels\PostOfficeDisplayerViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Views.FindClosestWindow" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\FindClosestWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PostOfficesDataDisplayer.Utils.URLManager">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Utils\URLManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -436,6 +436,7 @@ namespace PostOfficesDataDisplayer.ViewModels
                    
                     SaveFileDialog dialog = new SaveFileDialog();
                     dialog.DefaultExt = "csv";
+                    dialog.Filter = "Excel Files|*.csv;";
                     if (dialog.ShowDialog() == true)
                     {
                         string filePath = dialog.FileName;
@@ -586,26 +587,7 @@ namespace PostOfficesDataDisplayer.ViewModels
         private double GetDist(PostOffice p1)
         {
             //Haversine formula [https://en.wikipedia.org/wiki/Haversine_formula]
-            double EarthRadius = 6371;
-            double deltaLat = DegreesToRadians(p1.Location.Coords.X - _center.X);
-            double deltaLon = DegreesToRadians(p1.Location.Coords.Y - _center.Y);
-            double hav = Math.Sin(deltaLat / 2) * Math.Sin(deltaLat / 2) +
-                         Math.Cos(DegreesToRadians(p1.Location.Coords.X)) * Math.Cos(DegreesToRadians(_center.X)) *
-                         Math.Sin(deltaLon / 2) * Math.Sin(deltaLon / 2);
-
-            double ans = EarthRadius * 2 * Math.Atan2(Math.Sqrt(hav), Math.Sqrt(1 - hav));
-            return ans;
-        }
-
-        /// <summary>
-        /// Degreeses to radians.
-        /// </summary>
-        /// <returns>The to radians.</returns>
-        /// <param name="deg">Deg.</param>
-        private double DegreesToRadians(double deg)
-        {
-            return deg * Math.PI / 180;
-
+            return p1.Location.DistTo(_center);
         }
 
         /// <summary>

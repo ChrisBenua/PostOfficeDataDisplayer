@@ -73,7 +73,14 @@ namespace PostOfficesDataDisplayer.Models
 
             set
             {
-                _rowNum = value;
+                if (Validator.ValidateInt(value, arg => arg > 0).Item1)
+                {
+                    _rowNum = value;
+                } 
+                else
+                {
+                    MessageBox.Show("Invalid RowNum, expected integer-like value", "Wrong Format");
+                }
                 OnPropertyChanged();
             }
         }
@@ -289,6 +296,10 @@ namespace PostOfficesDataDisplayer.Models
                 {
                     _UNOM = value;
                 }
+                else
+                {
+                    MessageBox.Show("Invalid UNOM, expected integer-like value", "Wrong Format");
+                }
 
                 OnPropertyChanged();
             }
@@ -313,6 +324,11 @@ namespace PostOfficesDataDisplayer.Models
                 if (res.Item1)
                 {
                     _globalID = value;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid GlobaloID, expected integer-like value", "Wrong Format");
+
                 }
                 OnPropertyChanged();
             }
@@ -373,7 +389,7 @@ namespace PostOfficesDataDisplayer.Models
             this.Schedule = new WorkingSchedule("", "");
             this.ClassOPS = "";
             this.TypeOPS = "";
-            this.MMR = MMR;
+            this.MMR = "";
             this.CloseFlag = "";
             this.CloseExtraInfo = "";
             this.UNOM = "";
