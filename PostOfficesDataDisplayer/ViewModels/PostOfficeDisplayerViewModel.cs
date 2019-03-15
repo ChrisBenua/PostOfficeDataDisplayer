@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using PostOfficesDataDisplayer.Models;
 using PostOfficesDataDisplayer.Utils;
 using PostOfficesDataDisplayer.Views;
+using System.Diagnostics;
 
 namespace PostOfficesDataDisplayer.ViewModels
 {
@@ -146,16 +147,23 @@ namespace PostOfficesDataDisplayer.ViewModels
         /// Gets the post offices prefix.
         /// </summary>
         /// <value>The post offices prefix.</value>
-        public ObservableCollection<PostOffice> PostOfficesPrefix
+        public IEnumerable<PostOffice> PostOfficesPrefix
         {
             get
             {
-                return SortComparisons[_sortPredicateIndex] != null ? new ObservableCollection<PostOffice>(PostOffices.
+                var stopWatch = new Stopwatch();
+                stopWatch.Start();
+                var ans = SortComparisons[_sortPredicateIndex] != null ? PostOffices.
                     Take(PrefixCount).
                     Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]).
-                    OrderBy(SortComparisons[_sortPredicateIndex])) :
-                    new ObservableCollection<PostOffice>(PostOffices.Take(PrefixCount).
-                    Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]));
+                    OrderBy(SortComparisons[_sortPredicateIndex]) 
+                    :
+                    
+                    PostOffices.Take(PrefixCount).
+                    Where(GetFilterPredicates(FilterStr)[_filterPredicateIndex]);
+                stopWatch.Stop();
+                Console.WriteLine(stopWatch.ElapsedMilliseconds);
+                return ans;
 
             }
 

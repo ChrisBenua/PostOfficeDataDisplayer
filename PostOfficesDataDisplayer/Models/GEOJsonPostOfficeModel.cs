@@ -30,7 +30,7 @@ namespace PostOfficesDataDisplayer.Models
         /// <see cref="T:PostOfficesDataDisplayer.Models.GEOJsonPostOfficeCollection"/> class.
         /// </summary>
         /// <param name="postOffices">Post offices.</param>
-        public GEOJsonPostOfficeCollection(IList<PostOffice> postOffices)
+        public GEOJsonPostOfficeCollection(IEnumerable<PostOffice> postOffices)
         {
             this.features = new List<GEOJsonFeature>();
             foreach (var el in postOffices)

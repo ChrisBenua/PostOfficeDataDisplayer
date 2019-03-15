@@ -34,6 +34,7 @@ namespace PostOfficesDataDisplayer
         /// </summary>
         public MainWindow()
         {
+            Console.WriteLine(GC.TryStartNoGCRegion((1L << 74)));
             viewModel = new PostOfficeDisplayerViewModel();
             InitializeComponent();
 
@@ -128,7 +129,7 @@ namespace PostOfficesDataDisplayer
                 dataGrid.Columns.Add(column);
             }
             dataGrid.EnableRowVirtualization = true;
-            
+            dataGrid.RowHeight = 30;
             dataGrid.SetBinding(DataGrid.SelectedItemProperty, new Binding()
             {
                 Source = viewModel,
@@ -137,7 +138,6 @@ namespace PostOfficesDataDisplayer
                 NotifyOnTargetUpdated = true,
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             });
-
             dataGrid.SetBinding(DataGrid.ItemsSourceProperty, new Binding()
             {
                 Source = viewModel,

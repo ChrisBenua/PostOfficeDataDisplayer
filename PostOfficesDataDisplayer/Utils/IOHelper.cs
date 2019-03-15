@@ -20,7 +20,7 @@ namespace PostOfficesDataDisplayer.Utils
         /// </summary>
         /// <param name="filePath">File path.</param>
         /// <param name="postOffices">Post offices.</param>
-        public static void WriteGeoJson(string filePath, IList<PostOffice> postOffices)
+        public static void WriteGeoJson(string filePath, IEnumerable<PostOffice> postOffices)
         {
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(filePath))
@@ -77,7 +77,7 @@ namespace PostOfficesDataDisplayer.Utils
         /// <param name="postOffices">Post offices.</param>
         /// <param name="filePath">File path.</param>
         /// <param name="append">If set to <c>true</c> append.</param>
-        public static void WriteData(ObservableCollection<PostOffice> postOffices, string filePath, bool append)
+        public static void WriteData(IEnumerable<PostOffice> postOffices, string filePath, bool append)
         {
             
             if (!append)

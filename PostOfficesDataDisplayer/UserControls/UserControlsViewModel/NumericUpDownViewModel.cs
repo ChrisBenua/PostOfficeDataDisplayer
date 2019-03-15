@@ -75,6 +75,7 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
 
             set
             {
+  
                 // _text = value;
                 var tempValue = new string(value.ToCharArray());
                 //validation
@@ -102,9 +103,10 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
                 }
 
                 Value = _value;
-                
+
 
                 OnPropertyChanged();
+                
             }
         }
 
@@ -126,11 +128,12 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
 
             set
             {
-                
-                _value = value;
+                {
+                    _value = value;
+                    ValidateValue();
 
-                ValidateValue();
-                OnPropertyChanged();
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -139,14 +142,18 @@ namespace PostOfficesDataDisplayer.UserControls.UserControlsViewModel
         /// </summary>
         private void ValidateValue()
         {
+            var lastVal = _value;
             _value = Math.Max(MinValue, _value);
             _value = Math.Min(MaxValue, _value);
 
             _text = _value.ToString();
 
-
+            if (lastVal != _value)
+            {
+                OnPropertyChanged("Value");
+            }
             OnPropertyChanged("Text");
-            OnPropertyChanged("Value");
+
         }
 
         /// <summary>

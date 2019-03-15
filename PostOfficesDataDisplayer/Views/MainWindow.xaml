@@ -58,9 +58,11 @@
         <Button x:Name="mDeleteButton" Grid.Row="1" Grid.Column="4" Template="{StaticResource RoundButton}" Background="LightGray"
                 Margin="10, 5" Content="Remove Entity" IsEnabled="False"></Button>
 
-       
-        
-        <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.ColumnSpan="10"></DataGrid>
+
+
+        <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.ColumnSpan="10" VirtualizingStackPanel.VirtualizationMode="Recycling" VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"></DataGrid>
 
         <TextBox Grid.Row="1" Grid.Column="1" AcceptsReturn="true" MaxLines="2" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled"
                  VerticalScrollBarVisibility="Disabled" x:Name="mHintTextBox" BorderBrush="Transparent"
