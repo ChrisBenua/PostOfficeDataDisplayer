@@ -195,7 +195,7 @@ namespace PostOfficesDataDisplayer
         /// <param name="e">E.</param>
         private void StringTextBoxPreviewInput(object sender, TextCompositionEventArgs e)
         {
-            if ((e.Text.Length + (sender as TextBox).Text.Length) > PostOfficeDisplayerViewModel.MaxLenForStringColumns)
+            if ((e.Text.Length + (sender as TextBox).Text.Length) > PostOfficeDisplayerViewModel.MaxLenForStringColumns || e.Text.Contains("\""))
             {
                 e.Handled = true;
             }
