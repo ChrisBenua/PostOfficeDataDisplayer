@@ -34,7 +34,7 @@ namespace PostOfficesDataDisplayer
         /// </summary>
         public MainWindow()
         {
-            Console.WriteLine(GC.TryStartNoGCRegion((1L << 74)));
+            //Console.WriteLine(GC.TryStartNoGCRegion((1L << 74)));
             viewModel = new PostOfficeDisplayerViewModel();
             InitializeComponent();
 
